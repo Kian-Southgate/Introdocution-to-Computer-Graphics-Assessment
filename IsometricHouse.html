@@ -44,30 +44,35 @@
     var westGeometry = new THREE.BoxGeometry (20, 10, 2);
     var westMaterial = new THREE.MeshBasicMaterial();
     var westwall = new THREE.Mesh (westGeometry, westMaterial);
-    westwall.position.x+=2;
+    westwall.color = new THREE.Color(0xC5574B);
+    westwall.position.x+=10;
     westwall.position.y=0;
     westwall.position.z=0;
+
     // east wall
     var eastGeometry = new THREE.BoxGeometry (20, 10, 2);
     var eastMaterial = new THREE.MeshBasicMaterial();
     var eastwall = new THREE.Mesh (eastGeometry, eastMaterial);
-    eastwall.position.x-=2;
+    eastwall.color = new THREE.Color(0x4B6DC5);
+    eastwall.position.x-=10;
     eastwall.position.y=0;
     eastwall.position.z=0;
     // north wall
     var northGeometry = new THREE.BoxGeometry (20, 10, 2);
     var northMaterial = new THREE.MeshBasicMaterial();
     var northwall = new THREE.Mesh (northGeometry, northMaterial);
+    northwall.color = new THREE.Color(0x4BC56D);
     northwall.position.x=0;
     northwall.position.y=0;
-    northwall.position.z+=2;
+    northwall.position.z+=10;
     // south wall
     var southGeometry = new THREE.BoxGeometry (20, 10, 2);
     var southMaterial = new THREE.MeshBasicMaterial();
     var southwall = new THREE.Mesh (southGeometry, southMaterial);
+    southwall.color = new THREE.Color(0xC54BB8);
     northwall.position.x=0;
     northwall.position.y=0;
-    northwall.position.z-=2;
+    northwall.position.z-=10;
     //floor
 
 
@@ -84,8 +89,21 @@
     //Add to scene
     scene.add(westwall, eastwall, northwall, southwall, outsidelight);
 
+    //CONTROLS
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    var cameralight = new THREE.PointLight(new THREE.Color(1,1,1), 1);
+    camera.add(cameralight);
+    //RENDER UPDATE LOOP
+    var myUpdateLoop = function()
+    {
+      renderer.render(scene, camera);
+      controls.update();
+      requestAnimationFrame(myUpdateLoop);
+    };
+    requestAnimationFrame(myUpdateLoop);
+
     //WINDOW RESIZE
-    var resize = function()
+    var MyResize = function()
     {
       var width = window.innerWidth;
       var height = window.innerHeight;
@@ -94,9 +112,8 @@
       camera.updateProjectionMatrix();
       renderer.render(scene,camera);
     };
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', MyResize);
 
-    renderer.render(scene, camera);
 </script>
   </body>
 </html>
