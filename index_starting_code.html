@@ -34,7 +34,9 @@
 
     <div id="info">
       <p>This is a threeJS Test<br>
+        <p> <button onclick="bunnySpinner()">SPIN THAT BUNNY</button> <br>
     </div>
+
     <script>
 
       var scene = new THREE.Scene( );
@@ -164,6 +166,8 @@
       var C1 = false;
       var C2 = false;
       var C3 = false;
+
+
 
       var onMouseDown = function(event) {
         var coordinates = new THREE.Vector2();
@@ -332,6 +336,11 @@
 
       document.addEventListener('mousedown', onMouseDown);
 
+      function bunnySpinner() {
+        selectedObject.rotation.z += Math.PI / 4;
+      }
+
+      //onclick = selectedObject.rotation.y = Math.PI / 2;
 
       //this function is called when the window is resized
       var MyResize = function ( )
