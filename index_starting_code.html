@@ -34,7 +34,11 @@
 
     <div id="info">
       <p>This is a threeJS Test<br>
-        <p> <button onclick="bunnySpinner()">SPIN THAT BUNNY</button> <br>
+        <p> <button onclick="CubeSpawner()">Spawn a Cube</button> <br>
+        <p> <button onclick="bunnySpinner()">Rotate Object</button> <br>
+          <button onclick="bunnyCamo()">Make Selected camo texture</button> <br>
+             <button onclick="bunnyBW()">Make Selected black and white texture</button> <br>
+
     </div>
 
     <script>
@@ -52,12 +56,35 @@
   	  camera.lookAt(0,0,1);
 
       var material_floor = new THREE.MeshLambertMaterial();
+      material_floor.map =camo_texture; //Not sure why its camo but doesnt do anything.
       material_floor.color= new THREE.Color(0x93bcff);
       material_floor.side=THREE.DoubleSide;
+
+      var camo_texture = new THREE.TextureLoader().load('texture/camo.jpg');
+      var bw_texture = new THREE.TextureLoader().load('texture/bw.jpg');
+      var flower_texture = new THREE.TextureLoader().load('texture/flower.jpg');
+
+
+      var material_camo = new THREE.MeshPhongMaterial();
+      material_camo.color=  new THREE.Color(1,1,1);
+      material_camo.map = camo_texture;
+      material_camo.wireframe=false;
+
+      var material_bw = new THREE.MeshLambertMaterial();
+      material_bw.color=  new THREE.Color(1,1,1);
+      material_bw.map = bw_texture;
+      material_bw.wireframe=false;
+
+      var material_flower = new THREE.MeshLambertMaterial();
+      material_flower.color=  new THREE.Color(1,1,1);
+      material_flower.map = flower_texture;
+      material_flower.wireframe=false;
 
       var geometry_plane = new THREE.PlaneGeometry(10,10,10,10);
       var floorMesh= new THREE.Mesh(geometry_plane,material_floor);
       scene.add(floorMesh);
+
+
 
       controls = new THREE.OrbitControls( camera, renderer.domElement );
 
@@ -79,73 +106,9 @@
       gridHelper.position.z = 0;
       gridHelper.Color = red;
 
-
       //MESH LOADING
-      var loader = new THREE.PLYLoader();
-      var mesh = null;
-      loader.load('models/bunny.ply', function ( geometry )
-      {
-           geometry.computeVertexNormals();
-           geometry.computeBoundingBox();
-
-           var center = geometry.boundingBox.getCenter();
-           var size = geometry.boundingBox.getSize();
-           var min = geometry.boundingBox.min;
-
-           var sca = new THREE.Matrix4();
-           var tra = new THREE.Matrix4();
-
-           var ScaleFact=5/size.length();
-           sca.makeScale(ScaleFact,ScaleFact,ScaleFact);
-           //tra.makeTranslation (-center.x,-center.y,-min.z);
-           tra.makeTranslation (-center.x,-center.y,-min.z);
-
-           var material = new THREE.MeshPhongMaterial();
-           material.color= new THREE.Color(0.9,0.9,0.9);
-           material.shininess=100;
-           mesh = new THREE.Mesh( geometry, material );
-
-           mesh.applyMatrix(tra);
-           mesh.applyMatrix(sca);
 
 
-
-
-           scene.add( mesh );
-         } );
-
-         var loader = new THREE.PLYLoader();
-         var mesh = null;
-         loader.load('models/bunny.ply', function ( geometry )
-         {
-              geometry.computeVertexNormals();
-              geometry.computeBoundingBox();
-
-              var center = geometry.boundingBox.getCenter();
-              var size = geometry.boundingBox.getSize();
-              var min = geometry.boundingBox.min;
-
-              var sca = new THREE.Matrix4();
-              var tra = new THREE.Matrix4();
-
-              var ScaleFact=5/size.length();
-              sca.makeScale(ScaleFact,ScaleFact,ScaleFact);
-              //tra.makeTranslation (-center.x,-center.y,-min.z);
-              tra.makeTranslation (-center.x,-center.y,-min.z);
-
-              var material = new THREE.MeshPhongMaterial();
-              material.color= new THREE.Color(0.9,0.9,0.9);
-              material.shininess=100;
-              mesh = new THREE.Mesh( geometry, material );
-
-              mesh.applyMatrix(tra);
-              mesh.applyMatrix(sca);
-
-
-
-
-              scene.add( mesh );
-            } );
 
       var MyUpdateLoop = function ( )
       {
@@ -182,7 +145,7 @@
           if (selectedObject != null) {
             var pos = intersects[0].point;
 //A GRID ROW
-            if (pos.x < -1.6665 && pos.y > 1.6665 && A1 == false) {
+            if (pos.x < -1.6665 && pos.y > 1.6665 && pos.y < 5 && A1 == false) {
             selectedObject.position.x = -3.3333;
             selectedObject.position.y = 3.3333;
             selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
@@ -190,11 +153,11 @@
               A1 = true;
               console.log("A1 has been occupied")
             }
-            else if (pos.x < -1.6665 && pos.y > 1.6665 && A1 == true){
+            else if (pos.x < -1.6665 && pos.y > 1.6665 && pos.y < 5 && A1 == true){
               console.log("A1 Occupied");
             }
 
-            if (pos.x > -1.6665 && pos.x < 1.6665 && pos.y > 1.6665 && A2 == false) {
+            if (pos.x > -1.6665 && pos.x < 1.6665 && pos.y > 1.6665 && pos.y < 5 && A2 == false) {
             selectedObject.position.x = 0;
             selectedObject.position.y = 3.3333;
             selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
@@ -202,11 +165,11 @@
               A2 = true;
               console.log("A2 has been occupied")
             }
-            else if (pos.x > -1.6665 && pos.x < 1.6665 && pos.y > 1.6665 && A2 == true){
+            else if (pos.x > -1.6665 && pos.x < 1.6665 && pos.y > 1.6665 && pos.y < 5 && A2 == true){
               console.log("A2 Occupied");
             }
 
-            if (pos.x > 1.6665 && pos.y > 1.6665 && A3 == false) {
+            if (pos.x > 1.6665 && pos.y > 1.6665 && pos.y < 5 && A3 == false) {
             selectedObject.position.x = 3.3333;
             selectedObject.position.y = 3.333;
             selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
@@ -214,7 +177,7 @@
               A3 = true;
               console.log("A3 has been occupied")
             }
-            else if (pos.x > 1.6665 && pos.y > 1.6665 && A3 == true){
+            else if (pos.x > 1.6665 && pos.y > 1.6665 && pos.y < 5 && A3 == true){
               console.log("A3 Occupied");
             }
 
@@ -298,13 +261,13 @@
           selectedObject = intersects[0].object;
           selectedObject.material.color = new THREE.Color(1,0.5,0.5);
 
-          if (selectedObject.position.x < -1.6665 && selectedObject.position.y > 1.6665) {
+          if (selectedObject.position.x < -1.6665 && selectedObject.position.y > 1.6665 && selectedObject.position.y < 5) {
             A1 = false;
           }
-          if (selectedObject.position.x > -1.6665 && selectedObject.position.x < 1.6665 && selectedObject.position.y > 1.6665) {
+          if (selectedObject.position.x > -1.6665 && selectedObject.position.x < 1.6665 && selectedObject.position.y > 1.6665 && selectedObject.position.y < 5) {
             A2 = false;
           }
-          if (selectedObject.position.x > 1.6665 && selectedObject.position.y > 1.6665) {
+          if (selectedObject.position.x > 1.6665 && selectedObject.position.y > 1.6665 && selectedObject.position.y < 5) {
             A3 = false;
           }
 
@@ -334,11 +297,36 @@
         }
       }
 
+      var changed = false;
+
       document.addEventListener('mousedown', onMouseDown);
+
+      function CubeSpawner() {
+        var geometry_cube = new THREE.BoxGeometry(2.5,2.5,2.5);
+        var cube_mesh = new THREE.Mesh(geometry_cube,material_bw);
+        cube_mesh.position.x= + 7;
+        cube_mesh.position.z= 3;
+        scene.add(cube_mesh);
+      }
 
       function bunnySpinner() {
         selectedObject.rotation.z += Math.PI / 4;
       }
+      function bunnyCamo() {
+        selectedObject.traverse(function(child) {
+            if (child instanceof THREE.Mesh){
+                child.material = material_camo;
+            }
+      });
+    }
+    function bunnyBW() {
+      selectedObject.traverse(function(child) {
+          if (child instanceof THREE.Mesh){
+              child.material = material_bw;
+          }
+    });
+  }
+
 
       //onclick = selectedObject.rotation.y = Math.PI / 2;
 
