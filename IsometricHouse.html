@@ -6,17 +6,95 @@
     <!--The three.js library-->
     <script src="js/three.js"> </script>
     <!--Trackball library-->
-    <script src="js/OrbitControls"> </script>
+    <script src="js/OrbitControls.js"> </script>
     <!--GUI library-->
     <script src="js/dat.gui.min.js"> </script>
 
+    <style>
+      body {
+        font-family: ;
+
+      }
+    </style>
     <div>
         <h1> Isometric House </h1>
         <p> By Kian Southgate, Andy Lang, Jonathan Mifsud, Feras Sleiman & Max Simons </p>
     </div>
 
-<!-- <script-->
-<!-- INCLUDE PROGRAM CODE HERE -->
-<!-- </script>-->
+ <script>
+<!--INCLUDE PROGRAM CODE HERE-->
+
+    //SCENE
+    var scene = new THREE.Scene();
+    var ratio = window.innerWidth/window.innerHeight;
+
+    //CAMERA
+    var camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 1000);
+    camera.position.set(0, 0, 15);
+    camera.lookAt(0, 0, 1);
+
+    //RENDERER
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    document.body.appendChild(renderer.domElement );
+
+
+    // HOUSE
+    // west wall
+    var westGeometry = new THREE.BoxGeometry (20, 10, 2);
+    var westMaterial = new THREE.MeshBasicMaterial();
+    var westwall = new THREE.Mesh (westGeometry, westMaterial);
+    westwall.position.x+=2;
+    westwall.position.y=0;
+    westwall.position.z=0;
+    // east wall
+    var eastGeometry = new THREE.BoxGeometry (20, 10, 2);
+    var eastMaterial = new THREE.MeshBasicMaterial();
+    var eastwall = new THREE.Mesh (eastGeometry, eastMaterial);
+    eastwall.position.x-=2;
+    eastwall.position.y=0;
+    eastwall.position.z=0;
+    // north wall
+    var northGeometry = new THREE.BoxGeometry (20, 10, 2);
+    var northMaterial = new THREE.MeshBasicMaterial();
+    var northwall = new THREE.Mesh (northGeometry, northMaterial);
+    northwall.position.x=0;
+    northwall.position.y=0;
+    northwall.position.z+=2;
+    // south wall
+    var southGeometry = new THREE.BoxGeometry (20, 10, 2);
+    var southMaterial = new THREE.MeshBasicMaterial();
+    var southwall = new THREE.Mesh (southGeometry, southMaterial);
+    northwall.position.x=0;
+    northwall.position.y=0;
+    northwall.position.z-=2;
+    //floor
+
+
+    // LIGHTING
+    // External Sunlight
+    var outsidelight = new THREE.AmbientLight(0xFBFBDF);
+    outsidelight.castShadow = true;
+    // Shadow Properties
+    //outsidelight.shadow.mapSize.width = 512;
+    //outsidelight.shadow.mapSize.height = 512;
+    //outsidelight.shadow.camera.near = 0.5;
+    //outsidelight.shadow.camera.far = 500;
+
+    //Add to scene
+    scene.add(westwall, eastwall, northwall, southwall, outsidelight);
+
+    //WINDOW RESIZE
+    var resize = function()
+    {
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      renderer.setSize(width,height);
+      camera.aspect = width/height;
+      camera.updateProjectionMatrix();
+      renderer.render(scene,camera);
+    };
+    window.addEventListener('resize', resize);
+</script>
   </body>
 </html>
