@@ -35,14 +35,15 @@
 
     //RENDERER
     var renderer = new THREE.WebGLRenderer();
+    renderer.setClearColor (0xfffffffff, 1);
     renderer.setSize(window.innerWidth,window.innerHeight);
     document.body.appendChild(renderer.domElement );
 
 
     // HOUSE
     // west wall
-    var westGeometry = new THREE.BoxGeometry (2, 20, 100);
-    var westMaterial = new THREE.MeshBasicMaterial();
+    var westGeometry = new THREE.BoxGeometry (2, 200, 1000);
+    var westMaterial = new THREE.MeshBasicMaterial({color: 0xffda91});
     var westwall = new THREE.Mesh (westGeometry, westMaterial);
     westwall.color = new THREE.Color(1, 0, 1);
     westwall.position.x+=50;
@@ -50,41 +51,39 @@
     westwall.position.z=10;
 
     // east wall
-    var eastGeometry = new THREE.BoxGeometry (2, 20, 100);
-    var eastMaterial = new THREE.MeshBasicMaterial();
+    var eastGeometry = new THREE.BoxGeometry (2, 200, 1000);
+    var eastMaterial = new THREE.MeshBasicMaterial({color: 0xffda91});
     var eastwall = new THREE.Mesh (eastGeometry, eastMaterial);
     eastwall.color = new THREE.Color(0x4B6DC5);
     eastwall.position.x-=50;
     eastwall.position.y=0;
     eastwall.position.z=10;
     // north wall
-    var northGeometry = new THREE.BoxGeometry (100, 20, 2);
-    var northMaterial = new THREE.MeshBasicMaterial();
+    var northGeometry = new THREE.BoxGeometry (1000, 200, 2);
+    var northMaterial = new THREE.MeshBasicMaterial({color: 0xffda91});
     var northwall = new THREE.Mesh (northGeometry, northMaterial);
     northwall.color = new THREE.Color(0x4BC56D);
     northwall.position.x=0;
     northwall.position.y=0;
-    northwall.position.z+=50;
+    northwall.position.z-=40;
     // south wall
-    var southGeometry = new THREE.BoxGeometry (100, 20, 2);
-    var southMaterial = new THREE.MeshBasicMaterial();
+    var southGeometry = new THREE.BoxGeometry (1000, 200, 2);
+    var southMaterial = new THREE.MeshBasicMaterial({color: 0xffda91});
     var southwall = new THREE.Mesh (southGeometry, southMaterial);
-    southwall.color = new THREE.Color(0xC54BB8);
     southwall.position.x=0;
     southwall.position.y=0;
-    southwall.position.z-=50;
+    southwall.position.z+=60;
     //floor
-    var floorGeometry = new THREE.BoxGeometry (100, 100, 2);
-    var floorMaterial = new THREE.MeshBasicMaterial();
+    var floorGeometry = new THREE.BoxGeometry (1000, 1000, 2);
+    var floorMaterial = new THREE.MeshBasicMaterial({color: 0xe1ff89});
     var floor = new THREE.Mesh (floorGeometry, floorMaterial);
-    floor.color = new THREE.Color(0xC54BB8);
-    floor.position.x=0;
-    floor.position.y=0;
+    floor.position.x+=1;
+    floor.position.y-=1;
     floor.position.z=0;
 
     // LIGHTING
     // External Sunlight
-    var outsidelight = new THREE.AmbientLight(0xFBFBDF);
+    var outsidelight = new THREE.AmbientLight(0xf4e889);
     outsidelight.castShadow = true;
     // Shadow Properties
     //outsidelight.shadow.mapSize.width = 512;
