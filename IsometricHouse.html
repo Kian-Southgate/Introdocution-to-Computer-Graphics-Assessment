@@ -41,40 +41,46 @@
 
     // HOUSE
     // west wall
-    var westGeometry = new THREE.BoxGeometry (20, 10, 2);
+    var westGeometry = new THREE.BoxGeometry (2, 20, 100);
     var westMaterial = new THREE.MeshBasicMaterial();
     var westwall = new THREE.Mesh (westGeometry, westMaterial);
-    westwall.color = new THREE.Color(0xC5574B);
-    westwall.position.x+=10;
+    westwall.color = new THREE.Color(1, 0, 1);
+    westwall.position.x+=50;
     westwall.position.y=0;
-    westwall.position.z=0;
+    westwall.position.z=10;
 
     // east wall
-    var eastGeometry = new THREE.BoxGeometry (20, 10, 2);
+    var eastGeometry = new THREE.BoxGeometry (2, 20, 100);
     var eastMaterial = new THREE.MeshBasicMaterial();
     var eastwall = new THREE.Mesh (eastGeometry, eastMaterial);
     eastwall.color = new THREE.Color(0x4B6DC5);
-    eastwall.position.x-=10;
+    eastwall.position.x-=50;
     eastwall.position.y=0;
-    eastwall.position.z=0;
+    eastwall.position.z=10;
     // north wall
-    var northGeometry = new THREE.BoxGeometry (20, 10, 2);
+    var northGeometry = new THREE.BoxGeometry (100, 20, 2);
     var northMaterial = new THREE.MeshBasicMaterial();
     var northwall = new THREE.Mesh (northGeometry, northMaterial);
     northwall.color = new THREE.Color(0x4BC56D);
     northwall.position.x=0;
     northwall.position.y=0;
-    northwall.position.z+=10;
+    northwall.position.z+=50;
     // south wall
-    var southGeometry = new THREE.BoxGeometry (20, 10, 2);
+    var southGeometry = new THREE.BoxGeometry (100, 20, 2);
     var southMaterial = new THREE.MeshBasicMaterial();
     var southwall = new THREE.Mesh (southGeometry, southMaterial);
     southwall.color = new THREE.Color(0xC54BB8);
-    northwall.position.x=0;
-    northwall.position.y=0;
-    northwall.position.z-=10;
+    southwall.position.x=0;
+    southwall.position.y=0;
+    southwall.position.z-=50;
     //floor
-
+    var floorGeometry = new THREE.BoxGeometry (100, 100, 2);
+    var floorMaterial = new THREE.MeshBasicMaterial();
+    var floor = new THREE.Mesh (floorGeometry, floorMaterial);
+    floor.color = new THREE.Color(0xC54BB8);
+    floor.position.x=0;
+    floor.position.y=0;
+    floor.position.z=0;
 
     // LIGHTING
     // External Sunlight
