@@ -1,0 +1,357 @@
+<html>
+  <head>
+    <title>Simple Geometry Test</title>
+  </head>
+
+  <style>
+  body {margin: 0;}
+  canvas {width: 100%; height: 100%;}
+  </style>
+
+  <body>
+    <!--include the three.js library-->
+    <script src="js/three.js"> </script>
+    <!--and the trackball code-->
+    <script src="js/OrbitControls.js"> </script>
+    <!--the model loader-->
+    <script src="js/PLYLoader.js"></script>
+
+    <style>
+    			body {
+    				font-family: Monospace;
+    				background-color: #000;
+    				color: #fff;
+    				margin: 0px;
+    				overflow: hidden;
+    			}
+    			#info {
+    				position: absolute;
+    				top: 10px;
+    				width: 100%;
+    				text-align: center;
+    			}
+    </style>
+
+    <div id="info">
+      <p>This is a threeJS Test<br>
+    </div>
+    <script>
+
+      var scene = new THREE.Scene( );
+      var renderer = new THREE.WebGLRenderer( );
+
+      renderer.setSize(window.innerWidth,window.innerHeight);
+
+      document.body.appendChild(renderer.domElement );
+
+      var ratio = window.innerWidth/window.innerHeight;
+      var camera = new THREE.PerspectiveCamera(45,ratio,0.1,1000);
+      camera.position.set(0,0,20);
+  	  camera.lookAt(0,0,1);
+
+      var material_floor = new THREE.MeshLambertMaterial();
+      material_floor.color= new THREE.Color(0x93bcff);
+      material_floor.side=THREE.DoubleSide;
+
+      var geometry_plane = new THREE.PlaneGeometry(10,10,10,10);
+      var floorMesh= new THREE.Mesh(geometry_plane,material_floor);
+      scene.add(floorMesh);
+
+      controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+      var cameralight = new THREE.PointLight( new THREE.Color(1,1,1), 0.5 );
+      camera.add( cameralight );
+      scene.add(camera);
+
+      var ambientlight = new THREE.AmbientLight(new THREE.Color(1,1,1),0.2);
+      scene.add(ambientlight);
+
+
+      var size = 10;
+      var divisions = 3;
+      var red = new THREE.Color(0xff0026);
+
+      var gridHelper = new THREE.GridHelper( size, divisions, 0xe2e2e2 , red);
+      scene.add( gridHelper );
+      gridHelper.rotation.x = Math.PI / 2;
+      gridHelper.position.z = 0;
+      gridHelper.Color = red;
+
+
+      //MESH LOADING
+      var loader = new THREE.PLYLoader();
+      var mesh = null;
+      loader.load('models/bunny.ply', function ( geometry )
+      {
+           geometry.computeVertexNormals();
+           geometry.computeBoundingBox();
+
+           var center = geometry.boundingBox.getCenter();
+           var size = geometry.boundingBox.getSize();
+           var min = geometry.boundingBox.min;
+
+           var sca = new THREE.Matrix4();
+           var tra = new THREE.Matrix4();
+
+           var ScaleFact=5/size.length();
+           sca.makeScale(ScaleFact,ScaleFact,ScaleFact);
+           //tra.makeTranslation (-center.x,-center.y,-min.z);
+           tra.makeTranslation (-center.x,-center.y,-min.z);
+
+           var material = new THREE.MeshPhongMaterial();
+           material.color= new THREE.Color(0.9,0.9,0.9);
+           material.shininess=100;
+           mesh = new THREE.Mesh( geometry, material );
+
+           mesh.applyMatrix(tra);
+           mesh.applyMatrix(sca);
+
+
+
+
+           scene.add( mesh );
+         } );
+
+         var loader = new THREE.PLYLoader();
+         var mesh = null;
+         loader.load('models/bunny.ply', function ( geometry )
+         {
+              geometry.computeVertexNormals();
+              geometry.computeBoundingBox();
+
+              var center = geometry.boundingBox.getCenter();
+              var size = geometry.boundingBox.getSize();
+              var min = geometry.boundingBox.min;
+
+              var sca = new THREE.Matrix4();
+              var tra = new THREE.Matrix4();
+
+              var ScaleFact=5/size.length();
+              sca.makeScale(ScaleFact,ScaleFact,ScaleFact);
+              //tra.makeTranslation (-center.x,-center.y,-min.z);
+              tra.makeTranslation (-center.x,-center.y,-min.z);
+
+              var material = new THREE.MeshPhongMaterial();
+              material.color= new THREE.Color(0.9,0.9,0.9);
+              material.shininess=100;
+              mesh = new THREE.Mesh( geometry, material );
+
+              mesh.applyMatrix(tra);
+              mesh.applyMatrix(sca);
+
+
+
+
+              scene.add( mesh );
+            } );
+
+      var MyUpdateLoop = function ( )
+      {
+        renderer.render(scene,camera);
+        requestAnimationFrame(MyUpdateLoop);
+      };
+
+      requestAnimationFrame(MyUpdateLoop);
+      var selectedObject = null;
+      var raycaster = new THREE.Raycaster();
+
+      var A1 = false;
+      var A2 = false;
+      var A3 = false;
+      var B1 = false;
+      var B2 = false;
+      var B3 = false;
+      var C1 = false;
+      var C2 = false;
+      var C3 = false;
+
+      var onMouseDown = function(event) {
+        var coordinates = new THREE.Vector2();
+        coordinates.x = event.clientX / renderer.domElement.clientWidth*2 - 1;
+            coordinates.y = (event.clientY / renderer.domElement.clientHeight*2 - 1)*-1;
+        raycaster.setFromCamera(coordinates, camera);
+
+        var intersects = raycaster.intersectObjects(scene.children, false);
+
+        if (intersects.length > 0) {
+
+          if (selectedObject != null) {
+            var pos = intersects[0].point;
+//A GRID ROW
+            if (pos.x < -1.6665 && pos.y > 1.6665 && A1 == false) {
+            selectedObject.position.x = -3.3333;
+            selectedObject.position.y = 3.3333;
+            selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
+            selectedObject = null;
+              A1 = true;
+              console.log("A1 has been occupied")
+            }
+            else if (pos.x < -1.6665 && pos.y > 1.6665 && A1 == true){
+              console.log("A1 Occupied");
+            }
+
+            if (pos.x > -1.6665 && pos.x < 1.6665 && pos.y > 1.6665 && A2 == false) {
+            selectedObject.position.x = 0;
+            selectedObject.position.y = 3.3333;
+            selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
+            selectedObject = null;
+              A2 = true;
+              console.log("A2 has been occupied")
+            }
+            else if (pos.x > -1.6665 && pos.x < 1.6665 && pos.y > 1.6665 && A2 == true){
+              console.log("A2 Occupied");
+            }
+
+            if (pos.x > 1.6665 && pos.y > 1.6665 && A3 == false) {
+            selectedObject.position.x = 3.3333;
+            selectedObject.position.y = 3.333;
+            selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
+            selectedObject = null;
+              A3 = true;
+              console.log("A3 has been occupied")
+            }
+            else if (pos.x > 1.6665 && pos.y > 1.6665 && A3 == true){
+              console.log("A3 Occupied");
+            }
+
+// B GRID ROW
+            if (pos.x < -1.6665 && pos.y > -1.6665 && pos.y < 1.6665 && B1 == false) {
+            selectedObject.position.x = -3.3333;
+            selectedObject.position.y = 0;
+            selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
+            selectedObject = null;
+            console.log("B1 has been occupied");
+              B1 = true;
+            }
+            else if (pos.x < -1.6665 && pos.y > -1.6665 && pos.y < 1.6665 && B1 == true){
+              console.log("B1 Occupied");
+            }
+
+            if (pos.x > -1.6665 && pos.x < 1.6665 && pos.y > -1.6665 && pos.y < 1.6665 && B2 == false) {
+            selectedObject.position.x = 0;
+            selectedObject.position.y = 0;
+            selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
+            selectedObject = null;
+              B2 = true;
+              console.log("B2 has been occupied");
+            }
+            else if (pos.x > -1.6665 && pos.x < 1.6665 && pos.y > -1.6665 && pos.y < 1.6665 && B2 == true){
+              console.log("B2 Occupied");
+            }
+
+            if (pos.x > 1.6665 && pos.y > -1.6665 && pos.y < 1.6665 && B3 == false) {
+            selectedObject.position.x = 3.3333;
+            selectedObject.position.y = 0;
+            selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
+            selectedObject = null;
+              B3 = true;
+              console.log("B3 has been occupied");
+            }
+            else if (pos.x > 1.6665 && pos.y > -1.6665 && pos.y < 1.6665 && B3 == true){
+              console.log("B3 Occupied");
+            }
+
+// C Row
+            if (pos.x < -1.6665 && pos.y < -1.6665 && C1 == false) {
+            selectedObject.position.x = -3.3333;
+            selectedObject.position.y = -3.3333;
+            selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
+            selectedObject = null;
+            console.log("C1 has been occupied");
+              C1 = true;
+            }
+            else if (pos.x < -1.6665 && pos.y < -1.6665 && C1 == true){
+              console.log("C1 Occupied");
+            }
+
+            if (pos.x > -1.6665 && pos.x < 1.6665 && pos.y < -1.6665 && C2 == false) {
+            selectedObject.position.x = 0;
+            selectedObject.position.y = -3.3333;
+            selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
+            selectedObject = null;
+              C2 = true;
+              console.log("C2 has been occupied");
+            }
+            else if (pos.x > -1.6665 && pos.x < 1.6665 && pos.y < -1.6665 && C2 == true){
+              console.log("C2 Occupied");
+            }
+
+            if (pos.x > 1.6665 && pos.y < -1.6665 && C3 == false) {
+            selectedObject.position.x = 3.3333;
+            selectedObject.position.y = -3.3333;
+            selectedObject.material.color = new THREE.Color(.9,0.9,0.9);
+            selectedObject = null;
+              C3 = true;
+              console.log("C3 has been occupied");
+            }
+            else if (pos.x > 1.6665 && pos.y < -1.6665 && C3 == true){
+              console.log("C3 Occupied");
+            }
+          }
+
+// A GRID ROW
+        else if (selectedObject == null && intersects[0].object != floorMesh && intersects[0].object != gridHelper){
+          selectedObject = intersects[0].object;
+          selectedObject.material.color = new THREE.Color(1,0.5,0.5);
+
+          if (selectedObject.position.x < -1.6665 && selectedObject.position.y > 1.6665) {
+            A1 = false;
+          }
+          if (selectedObject.position.x > -1.6665 && selectedObject.position.x < 1.6665 && selectedObject.position.y > 1.6665) {
+            A2 = false;
+          }
+          if (selectedObject.position.x > 1.6665 && selectedObject.position.y > 1.6665) {
+            A3 = false;
+          }
+
+// B GRID ROW
+          if (selectedObject.position.x < -1.6665 && selectedObject.position.y > -1.6665 && selectedObject.position.y < 1.6665) {
+            B1 = false;
+          }
+          if (selectedObject.position.x > -1.6665 && selectedObject.position.x < 1.6665 && selectedObject.position.y > -1.6665 && selectedObject.position.y < 1.6665) {
+            B2 = false;
+          }
+          if (selectedObject.position.x > 1.6665 && selectedObject.position.y > -1.6665 && selectedObject.position.y < 1.6665) {
+            B3 = false;
+          }
+
+// C GRID ROW
+          if (selectedObject.position.x < -1.6665 && selectedObject.position.y < -1.6665) {
+            C1 = false;
+          }
+          if (selectedObject.position.x > -1.6665 && selectedObject.position.y < -1.6665) {
+            C2 = false;
+          }
+          if (selectedObject.position.x > 1.6665 && selectedObject.position.y < -1.6665) {
+            C3 = false;
+          }
+
+      }
+        }
+      }
+
+      document.addEventListener('mousedown', onMouseDown);
+
+
+      //this function is called when the window is resized
+      var MyResize = function ( )
+      {
+        //get the new sizes
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        //then update the renderer
+        renderer.setSize(width,height);
+        //and update the aspect ratio of the camera
+        camera.aspect = width/height;
+        //update the projection matrix given the new values
+        camera.updateProjectionMatrix();
+
+        //and finally render the scene again
+        renderer.render(scene,camera);
+      };
+      //link the resize of the window to the update of the camera
+      window.addEventListener( 'resize', MyResize);
+
+    </script>
+  </body>
+</html>
