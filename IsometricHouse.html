@@ -73,6 +73,7 @@
     var floorMaterial = new THREE.MeshBasicMaterial({color: 0xe1ff89, side: THREE.DoubleSide});
     var floor = new THREE.Mesh (floorGeometry, floorMaterial);
     floor.rotation.x = Math.PI/2;
+    //floor.position = (0,0,0);
 
     //Group Walls
     var house = new THREE.Group();
@@ -95,7 +96,7 @@
     //CAMERA
     var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 2, 5000);
     //camera.position.set(0, 0, 15);
-    camera.position.set(0, 20, 100);
+    camera.position.set(0, 1700 , 0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     //CONTROLS
