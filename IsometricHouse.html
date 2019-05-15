@@ -116,8 +116,11 @@
   	'models/sofa/sofa.obj',
   	// called when resource is loaded
   	function ( object ) {
-
-  		scene.add( object );
+        couch = object;
+        object.position.set(300, 0, 210)
+        object.rotation.y = 1.5;
+        object.rotation.y = 4.7;
+        scene.add( object );
 
   	},
   	// called when loading is in progresses
