@@ -92,6 +92,12 @@
     nwHall.position.x+=280;
     nwHall.position.y+=100;
     nwHall.position.z+=25;
+    var nwHallGeometry = new THREE.BoxGeometry (250, 200, 50);
+    var nwHallMaterial = new THREE.MeshBasicMaterial({color: 0x241d63}); //Aqua Hall Test
+    var nwHall = new THREE.Mesh (nwHallGeometry, nwHallMaterial);
+    nwHall.position.x+=280;
+    nwHall.position.y+=100;
+    nwHall.position.z+=25;
 
     //Group Walls
     var house = new THREE.Group();
