@@ -75,10 +75,34 @@
     southwall.position.z+=400;
     //floor
     var floorGeometry = new THREE.PlaneGeometry (1000, 1000, 1, 1);
-    var floorMaterial = new THREE.MeshBasicMaterial({color: 0xe1ff89, side: THREE.DoubleSide});
+    var floorMaterial = new THREE.MeshBasicMaterial({color: 0xe1ff89, side: THREE.DoubleSide}); //Yellow Floor Test
     var floor = new THREE.Mesh (floorGeometry, floorMaterial);
     floor.rotation.x = Math.PI/2;
-    //floor.position = (0,0,0);
+    //Hallway
+    var eHallGeometry = new THREE.BoxGeometry (50, 200, 300);
+    var eHallMaterial = new THREE.MeshBasicMaterial({color: 0x42f4d1}); //Aqua Hall Test
+    var eHall = new THREE.Mesh (eHallGeometry, eHallMaterial);
+    eHall.position.x-=50;
+    eHall.position.y+=100;
+    eHall.position.z+=250;
+    var wHallGeometry = new THREE.BoxGeometry (50, 200, 400);
+    var wHallMaterial = new THREE.MeshBasicMaterial({color: 0x1f6b5c}); //Aqua Hall Test
+    var wHall = new THREE.Mesh (wHallGeometry, wHallMaterial);
+    wHall.position.x+=50;
+    wHall.position.y+=100;
+    wHall.position.z+=200;
+    var nwHallGeometry = new THREE.BoxGeometry (250, 200, 50);
+    var nwHallMaterial = new THREE.MeshBasicMaterial({color: 0x241d63}); //Aqua Hall Test
+    var nwHall = new THREE.Mesh (nwHallGeometry, nwHallMaterial);
+    nwHall.position.x+=280;
+    nwHall.position.y+=100;
+    nwHall.position.z+=25;
+    var nwHallGeometry = new THREE.BoxGeometry (250, 200, 50);
+    var nwHallMaterial = new THREE.MeshBasicMaterial({color: 0x241d63}); //Aqua Hall Test
+    var nwHall = new THREE.Mesh (nwHallGeometry, nwHallMaterial);
+    nwHall.position.x+=280;
+    nwHall.position.y+=100;
+    nwHall.position.z+=25;
 
     //load a couch
     //loader.load('C:/Users/Kian/Documents/UTS/Intro to comp graphics/Assessment/Introdocution-to-Computer-Graphics-Assessment/models/sofa',function(object){scene.add(object);},
@@ -117,6 +141,12 @@
     house.add(westwall);
     house.add(eastwall);
     house.add(floor);
+    var walls = new THREE.Group();
+    walls.add(eHall);
+    walls.add(wHall);
+    walls.add(nwHall);
+     
+    
     // LIGHTING
     // External Sunlight
     var ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
@@ -126,7 +156,7 @@
     camera.add(pointLight);*/
 
     //Add to scene
-    scene.add(house, ambientLight);
+    scene.add(house, walls, ambientLight);
 
     //CAMERA
     var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 2, 5000);
