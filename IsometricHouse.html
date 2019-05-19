@@ -12,9 +12,9 @@
     <!--The object loader-->
     <script src="js/OBJLoader.js"></script>
     <!--The material loader-->
-    <script src="js/MTLLoader.js"></script> 
-     
-   
+    <script src="js/MTLLoader.js"></script>
+
+
 
 
     <style>
@@ -113,7 +113,7 @@
 
     // instantiate a loader
    /* var loader = new THREE.OBJLoader();
-   
+
 
   // load a resource
   loader.load(
@@ -144,26 +144,26 @@
 
   	}
   );*/
-     
+
      var mtlLoader = new THREE.MTLLoader();
-     
-     
+
+
     mtlLoader.load("models/sofa/sofa.mtl", function(materials){
-        
+
         materials.preload();
         var objLoader = new THREE.OBJLoader();
         objLoader.setMaterials(materials);
-        
+
         objLoader.load("models/sofa/sofa.obj",function(mesh){
            mesh.position.set(300, 0, 210);
         mesh.rotation.y = 1.5;
         mesh.rotation.y = 4.7;
             scene.add(mesh);
-            
+
         });
     });
-     
-     
+
+
 
     //Group Walls
     var house = new THREE.Group();
@@ -176,15 +176,15 @@
     walls.add(eHall);
     walls.add(wHall);
     walls.add(nwHall);
-     
-    
+
+
     // LIGHTING
     // External Sunlight
     var ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
     scene.add(ambientLight);
-     
+
    light = new THREE.PointLight(0xffffff, 0.8, 18);
-     
+
     /*var pointLight = new THREE.PointLight(0xffffff, 0.8);
     scene.add(camera);
     camera.add(pointLight);*/
@@ -250,6 +250,52 @@
         renderer.render(scene, camera);
 			}
     */
+
+//GUI
+var scene, camera, renderer;
+
+  var cube;
+
+  init();
+  animate();
+  buildGui();
+
+function init(){
+   scene = new THREE.Scene( );
+   camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+   renderer = new THREE.WebGLRenderer( );
+   renderer.setSize(window.innerWidth,window.innerHeight);
+   document.body.appendChild(renderer.domElement);
+
+   var geometry = new THREE.BoxGeometry(1,1,1);
+   var material = new THREE.MeshBasicMaterial({color:0x00ff00});
+   cube = new THREE.Mesh(geometry, material);
+   scene.add(cube);
+
+   camera.position.z = 5;
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+  render();
+}
+
+function render(){
+  renderer.clear();
+  renderer.render(scene, camera);
+}
+
+function buildGui() {
+  var gui = new dat.GUI({height: 2 * 32 - 1});
+  var params = {
+    a: "",
+    b: "",
+  }
+
+  gui.add(params, 'a', ["Cube", "Sphere", "Prism"]).name('Models');
+  gui.add(params, 'b', ["Green", "Red", "Blue"]).name('Textures');
+
+  gui.close();
 
 </script>
   </body>
