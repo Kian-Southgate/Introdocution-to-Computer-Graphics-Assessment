@@ -147,7 +147,7 @@
 
      var mtlLoader = new THREE.MTLLoader();
 
-
+scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9));
     mtlLoader.load("models/sofa/sofa.mtl", function(materials){
 
         materials.preload();
