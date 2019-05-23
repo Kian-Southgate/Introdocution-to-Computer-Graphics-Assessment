@@ -150,46 +150,12 @@
     var landMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.DoubleSide}); //Green Grass Floor
     var land = new THREE.Mesh (landGeometry, landMaterial);
     land.rotation.x = Math.PI/2;
-    //load a couch
-    //loader.load('C:/Users/Kian/Documents/UTS/Intro to comp graphics/Assessment/Introdocution-to-Computer-Graphics-Assessment/models/sofa',function(object){scene.add(object);},
+     
+     scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9)); //add light to see interior
+    //load a couch object and material 
 
-    // instantiate a loader
-   /* var loader = new THREE.OBJLoader();
-
-
-  // load a resource
-  loader.load(
-  	// resource URL
-  	'models/sofa/sofa.obj',
-      //material URL
-      'models/sofa/sofa.mtl',
-     // 'models/sofa/sofa.mtl',
-  	// called when resource is loaded
-  	function ( object ) {
-        couch = object;
-        object.position.set(300, 0, 210);
-        object.rotation.y = 1.5;
-        object.rotation.y = 4.7;
-        scene.add( object );
-
-  	},
-  	// called when loading is in progresses
-  	function ( xhr ) {
-
-  		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-  	},
-  	// called when loading has errors
-  	function ( error ) {
-
-  		console.log( 'An error happened' );
-
-  	}
-  );*/
-
-     var mtlLoader = new THREE.MTLLoader();
-
-scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9));
+    var mtlLoader = new THREE.MTLLoader();
+     
     mtlLoader.load("models/sofa/sofa.mtl", function(materials){
 
         materials.preload();
@@ -200,6 +166,40 @@ scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9));
            mesh.position.set(300, 0, 210);
         mesh.rotation.y = 1.5;
         mesh.rotation.y = 4.7;
+            scene.add(mesh);
+
+        });
+    });
+     
+       
+     //load a bed object and material
+     var mtlLoader = new THREE.MTLLoader();
+     
+    mtlLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj",function(mesh){
+           //need to change position and make bed flat with floor
+            scene.add(mesh);
+
+        });
+    });
+     
+     //load a dining table object with same white material used for the bed
+     var mtlLoader = new THREE.MTLLoader();
+     
+    mtlLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/dining_table/Minimalist Dining Table.obj",function(mesh){
+           //need to change position and make bed flat with floor
+             mesh.position.set(0, 0, -160);
             scene.add(mesh);
 
         });
