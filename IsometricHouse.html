@@ -151,8 +151,9 @@
     var land = new THREE.Mesh (landGeometry, landMaterial);
     land.rotation.x = Math.PI/2;
      
-     scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9)); //add light to see interior
-    //load a couch object and material 
+    scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9)); //add light to see interior
+    
+     //load a couch object and material 
 
     var mtlLoader = new THREE.MTLLoader();
      
@@ -163,10 +164,10 @@
         objLoader.setMaterials(materials);
 
         objLoader.load("models/sofa/sofa.obj",function(mesh){
-           mesh.position.set(300, 0, 210);
-        mesh.rotation.y = 1.5;
+        mesh.position.set(300, 0, 210);
         mesh.rotation.y = 4.7;
-            scene.add(mesh);
+        mesh.scale.set(1, 1, 1);
+        scene.add(mesh);
 
         });
     });
@@ -182,8 +183,13 @@
         objLoader.setMaterials(materials);
 
         objLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj",function(mesh){
+        mesh.position.set(-300, 50, 150);
+        mesh.rotation.y = Math.PI;
+        mesh.rotation.z = Math.PI;
+        mesh.rotation.x = Math.PI / 2;
+        mesh.scale.set(1, 1, 1);
            //need to change position and make bed flat with floor
-            scene.add(mesh);
+        scene.add(mesh);
 
         });
     });
@@ -199,8 +205,12 @@
 
         objLoader.load("models/dining_table/Minimalist Dining Table.obj",function(mesh){
            //need to change position and make bed flat with floor
-             mesh.position.set(0, 0, -160);
-            scene.add(mesh);
+        mesh.position.set(-250, 0, -200);
+        mesh.rotation.y = Math.PI;
+        mesh.rotation.z = Math.PI;
+        mesh.rotation.x = Math.PI;
+        mesh.scale.set(1.4, 1.4, 1.4);
+        scene.add(mesh);
 
         });
     });
