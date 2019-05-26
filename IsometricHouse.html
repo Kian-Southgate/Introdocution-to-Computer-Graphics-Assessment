@@ -45,7 +45,7 @@
 
     //object loader
     //var loader = new THREE.ObjectLoader();
-     
+
     //LIGHTING
     var light = new THREE.SpotLight(0x000000, 2);
     light.castShadow = true;
@@ -136,7 +136,7 @@
     room2Hall.position.x-=225;
     room2Hall.position.y+=100;
     room2Hall.position.z+=25;
-     
+
     // NATURE
     // External Light Object (Sun)
     var sunGeometry = new THREE.SphereBufferGeometry(100, 100, 100);
@@ -150,13 +150,13 @@
     var landMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.DoubleSide}); //Green Grass Floor
     var land = new THREE.Mesh (landGeometry, landMaterial);
     land.rotation.x = Math.PI/2;
-     
+
     scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9)); //add light to see interior
-    
-     //load a couch object and material 
+
+     //load a couch object and material
 
     var mtlLoader = new THREE.MTLLoader();
-     
+
     mtlLoader.load("models/sofa/sofa.mtl", function(materials){
 
         materials.preload();
@@ -171,11 +171,11 @@
 
         });
     });
-     
-       
+
+
      //load a bed object and material
      var mtlLoader = new THREE.MTLLoader();
-     
+
     mtlLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.mtl", function(materials){
 
         materials.preload();
@@ -193,10 +193,10 @@
 
         });
     });
-     
+
      //load a dining table object with same white material used for the bed
      var mtlLoader = new THREE.MTLLoader();
-     
+
     mtlLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.mtl", function(materials){
 
         materials.preload();
@@ -297,16 +297,28 @@
   buildGui();
 
 function buildGui() {
-  var gui = new dat.GUI({height: 2 * 32 - 1});
   var params = {
-    a: "",
-    b: "",
+    sofa : false,
+    table : false,
+    wood : false,
+    vinyl : false,
   }
 
-  gui.add(params, 'a', ["Cube", "Sphere", "Prism"]).name('Models');
-  gui.add(params, 'b', ["Green", "Red", "Blue"]).name('Textures');
+  window.onload = function(){
+    var gui = new dat.GUI({height: 2 * 32 - 1});
 
-  gui.close();
+    var mod_drop = gui.addFolder("Models");
+
+    mod_drop.add(params,'sofa').name("Sofa");
+    mod_drop.add(params,'table').name("Table");
+
+    var tex_drop = gui.addFolder("Textures");
+
+    tex_drop.add(params, 'wood').name("Wood");
+    tex_drop.add(params, 'vinyl').name("Vinyl");
+
+    gui.open();
+  }
 }
 
 </script>
