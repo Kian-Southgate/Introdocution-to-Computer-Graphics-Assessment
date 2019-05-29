@@ -24,8 +24,7 @@
       }
     </style>
     <div>
-        <h1> Isometric House </h1>
-        <p> By Kian Southgate, Andy Lang, Jonathan Mifsud, Feras Sleiman & Max Simons </p>
+        
     </div>
 
  <script>
@@ -65,7 +64,7 @@
     // HOUSE
     // west wall
     var westGeometry = new THREE.BoxGeometry (20, 200, 1000);
-    var westMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); 
+    var westMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
     var westwall = new THREE.Mesh (westGeometry, westMaterial);
     westwall.color = new THREE.Color(1, 0, 1);
     westwall.position.x-=500;
@@ -74,7 +73,7 @@
     westwall.receiveshadow = true;
     // east wall
     var eastGeometry = new THREE.BoxGeometry (20, 200, 1000);
-    var eastMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); 
+    var eastMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
     var eastwall = new THREE.Mesh (eastGeometry, eastMaterial);
     eastwall.color = new THREE.Color(0xFFEFD5);
     eastwall.position.x+=500;
@@ -83,7 +82,7 @@
     eastwall.receiveshadow = true;
     // north wall
     var northGeometry = new THREE.BoxGeometry (1000, 200, 20);
-    var northMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); 
+    var northMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
     var northwall = new THREE.Mesh (northGeometry, northMaterial);
     northwall.color = new THREE.Color(0xFFEFD5);
     northwall.position.x=00;
@@ -92,7 +91,7 @@
     northwall.receiveshadow = true;
     // south wall left
     var south1Geometry = new THREE.BoxGeometry (400, 200, 20);
-    var south1Material = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); 
+    var south1Material = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
     var south1wall = new THREE.Mesh (south1Geometry, south1Material);
     south1wall.position.x-=300;
     south1wall.position.y=100;
@@ -100,7 +99,7 @@
     south1wall.receiveshadow = true;
     // south wall right
     var south2Geometry = new THREE.BoxGeometry (500, 200, 20);
-    var south2Material = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); 
+    var south2Material = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
     var south2wall = new THREE.Mesh (south2Geometry, south2Material);
     south2wall.position.x+=250;
     south2wall.position.y=100;
@@ -108,7 +107,7 @@
     south2wall.receiveshadow = true;
     //floor
     var floorGeometry = new THREE.BoxGeometry (1000, 20, 1000);
-    var floorMaterial = new THREE.MeshLambertMaterial({color: 0xEEE8AA}), 
+    var floorMaterial = new THREE.MeshLambertMaterial({color: 0xEEE8AA}),
     floor = new THREE.Mesh (floorGeometry, floorMaterial);
     floor.position.set(0, 0, 0);
     //Hallway
@@ -296,6 +295,7 @@
     */
 
 //GUI
+//GUI
   buildGui();
 
 function buildGui() {
@@ -305,23 +305,79 @@ function buildGui() {
     wood : false,
     vinyl : false,
   }
+  var Cube = {
+    Cube:function(){ CubeSpawner() }
+  };
+  var Sofa = {
+    Sofa:function() { CubeSpawner() }
+  };
+  var gOn = {
+    gridOn:function(){ enableGrid() }
+  };
+  var gOff = {
+    gridOff:function(){ disableGrid() }
+  };
+  var Camo = {
+    Camo:function(){ CamoTexture() }
+  };
+
+  var Bw = {
+    BlackWhite:function(){ BWTexture() }
+  };
 
   window.onload = function(){
     var gui = new dat.GUI({height: 2 * 32 - 1});
 
     var mod_drop = gui.addFolder("Models");
+    mod_drop.add(Cube,'Cube');
+    mod_drop.add(Sofa,'Sofa');
 
-    mod_drop.add(params,'sofa').name("Sofa");
-    mod_drop.add(params,'table').name("Table");
 
     var tex_drop = gui.addFolder("Textures");
+    tex_drop.add(Camo,'Camo');
+    tex_drop.add(Bw,'BlackWhite');
 
-    tex_drop.add(params, 'wood').name("Wood");
-    tex_drop.add(params, 'vinyl').name("Vinyl");
+    var func_drop = gui.addFolder("Functions");
+
+    func_drop.add(gOn,'gridOn');
+    func_drop.add(gOff,'gridOff');
 
     gui.open();
   }
 }
+
+//MAX SHIT PLZ NO TOUCHY
+//Cube TEXTURES
+function Spinner() {
+  selectedObject.rotation.z += Math.PI / 2;
+}
+function CamoTexture() {
+  selectedObject.traverse(function(child) {
+      if (child instanceof THREE.Mesh){
+          child.material = material_camo;
+          MaterialStore = material_camo;
+      }
+});
+}
+function BWTexture() {
+selectedObject.traverse(function(child) {
+    if (child instanceof THREE.Mesh){
+        child.material = material_bw;
+        MaterialStore = material_bw;
+    }
+});
+}
+
+//Spawner
+function CubeSpawner() {
+      var geometry_cube = new THREE.BoxGeometry(100,100,100);
+      var cube_mesh = new THREE.Mesh(geometry_cube,material_bw);
+      cube_mesh.position.x= 50;
+      cube_mesh.position.z= 0;
+      cube_mesh.position.y = 60;
+      scene.add(cube_mesh);
+      RaycasterObjects.push(cube_mesh);
+    }
 
 //Grid
 var Gridsize = 1000;
@@ -329,11 +385,132 @@ var Gridsize = 1000;
       var red = new THREE.Color(0xff0026);
 
       var gridHelper = new THREE.GridHelper( Gridsize, Griddivisions, red , red);
-      scene.add( gridHelper );
+    //  scene.add( gridHelper );
       gridHelper.rotation.x = 0;
       gridHelper.position.z = 0;
       gridHelper.position.y = 11;
       gridHelper.Color = red;
+
+      function disableGrid(){
+        scene.remove( gridHelper );
+      }
+      function enableGrid(){
+        scene.add( gridHelper );
+      }
+
+//PICKING CODE
+      var MyUpdateLoop = function ( )
+      {
+      renderer.render(scene,camera);
+      requestAnimationFrame(MyUpdateLoop);
+      };
+
+      requestAnimationFrame(MyUpdateLoop);
+      var selectedObject = null;
+      var raycaster = new THREE.Raycaster();
+
+      var UsedCoords = [];
+
+      var MaterialStore;
+
+      var RaycasterObjects = [];
+      RaycasterObjects.push(floor);
+    //  RaycasterObjects.push(floor);
+
+      var onMouseDown = function(event) {
+            var coordinates = new THREE.Vector3();
+            coordinates.x = event.clientX / renderer.domElement.clientWidth*2 - 1;
+                coordinates.y = -(event.clientY / renderer.domElement.clientHeight*2 - 1);
+            raycaster.setFromCamera(coordinates, camera);
+
+            var intersects = raycaster.intersectObjects(RaycasterObjects, false);
+            if (intersects.length > 0) {
+
+              if (selectedObject != null) {
+
+                var CurrentCoord = Coord(selectedObject.position.x, selectedObject.position.z) ;
+                //console.log(CurrentCoord);
+                for (i = 0; i < UsedCoords.length; i++) {
+                 if (CurrentCoord == UsedCoords[i]) {
+                   UsedCoords.splice(i,1);
+                   console.log("Coord: "+CurrentCoord+" Removed");
+                 }
+               }
+
+              var pos = intersects[0].point;
+               var CoordToCheck = Coord(setX(pos.x), setZ(pos.z));
+               var Used = false;
+               for (i = 0; i < UsedCoords.length; i++) {
+                if (CoordToCheck == UsedCoords[i]) {
+                  console.log('Coord Is Occupied');
+                  Used = true;
+
+                }
+              }
+              if (Used == false) {
+                UsedCoords.push(CoordToCheck);
+                console.log("Coord: "+CoordToCheck  +" was added");
+                selectedObject.position.x = setX(pos.x);
+                selectedObject.position.z = setZ(pos.z);
+                selectedObject.material = MaterialStore;
+                MaterialStore = null;
+                selectedObject = null;
+              }
+        }
+
+
+      else if (selectedObject == null && intersects[0].object != floor && intersects[0].object != gridHelper ){
+        selectedObject = intersects[0].object;
+                MaterialStore = selectedObject.material;
+                selectedObject.material = material_flower;
+    }
+      }
+    }
+
+    document.addEventListener('mousedown', onMouseDown);
+
+    function setX(X) {
+            var X2 = X/100;
+            var low = Math.floor(X2);
+            var high = Math.ceil(X2);
+            var mid = (low + high)*.5;
+            return mid*100;
+          }
+
+          function setZ(Z) {
+            var Z2 = Z/100
+            var low = Math.floor(Z2);
+            var high = Math.ceil(Z2);
+            var mid = (low + high)*.5;
+            return mid*100;
+          }
+
+          function Coord(X, Z) {
+            X = X/100;
+            Z = Z/100;
+            var CoordText = ('X:'+X+' Z:'+Z);
+            return CoordText
+
+          }
+      var camo_texture = new THREE.TextureLoader().load('texture/camo.jpg');
+      var bw_texture = new THREE.TextureLoader().load('texture/bw.jpg');
+      var flower_texture = new THREE.TextureLoader().load('texture/flowers.jpg');
+
+      var material_camo = new THREE.MeshPhongMaterial();
+          material_camo.color=  new THREE.Color(1,1,1);
+          material_camo.map = camo_texture;
+          material_camo.wireframe=false;
+
+      var material_bw = new THREE.MeshLambertMaterial();
+          material_bw.color=  new THREE.Color(1,1,1);
+          material_bw.map = bw_texture;
+          material_bw.wireframe=false;
+
+      var material_flower = new THREE.MeshLambertMaterial();
+          material_flower.color=  new THREE.Color(1,1,1);
+          material_flower.map = flower_texture
+          material_flower.wireframe=false;
+
 </script>
   </body>
 </html>
