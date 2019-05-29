@@ -47,7 +47,7 @@
     //var loader = new THREE.ObjectLoader();
 
     //LIGHTING
-    var light = new THREE.SpotLight(0x000000, 2);
+    /*var light = new THREE.SpotLight(0x000000, 2);
     light.castShadow = true;
     light.position.set(-800, 800, 0);
     light.angle = Math.PI /4;
@@ -60,7 +60,15 @@
     light.shadow.camera.far = 1000;
     scene.add(light);
     var helper = new THREE.CameraHelper(light.shadow.camera);
-    scene.add(helper);
+    scene.add(helper);*/
+     
+     //SpotLight( color : Integer, intensity : Float, distance : Float, angle : Radians, penumbra : Float, decay : Float )
+     var bedroomlight = new THREE.SpotLight( 0xffffff);
+     bedroomlight.position.set(-350, 500, 150);
+     //bedroomlight.castshadow = true;
+     var spotLightHelper = new THREE.SpotLightHelper(bedroomlight);
+     scene.add(spotLightHelper);
+     scene.add(bedroomlight);
 
     // HOUSE
     // west wall
@@ -151,7 +159,7 @@
     var land = new THREE.Mesh (landGeometry, landMaterial);
     land.rotation.x = Math.PI/2;
 
-    scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9)); //add light to see interior
+    //scene.add(new THREE.AmbientLight(new THREE.Color(0xFFFFFF), 0.8)); //add light to see interior
 
      //load a couch object and material
 
