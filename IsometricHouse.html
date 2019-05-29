@@ -37,7 +37,7 @@
 
     //RENDERER
     var renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor (0xffffff, 1);
+    renderer.setClearColor (0x87CEEB, 1);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -47,7 +47,7 @@
     //var loader = new THREE.ObjectLoader();
 
     //LIGHTING
-    var light = new THREE.SpotLight(0x000000, 2);
+    var light = new THREE.SpotLight(0x50D1FF, 2);
     light.castShadow = true;
     light.position.set(-800, 800, 0);
     light.angle = Math.PI /4;
@@ -65,7 +65,7 @@
     // HOUSE
     // west wall
     var westGeometry = new THREE.BoxGeometry (20, 200, 800);
-    var westMaterial = new THREE.MeshBasicMaterial({color: 0x4286f4}); //Blue Wall TEST
+    var westMaterial = new THREE.MeshBasicMaterial({color: 0xC0C0C0}); 
     var westwall = new THREE.Mesh (westGeometry, westMaterial);
     westwall.color = new THREE.Color(1, 0, 1);
     westwall.position.x+=400;
@@ -74,25 +74,25 @@
     westwall.receiveshadow = true;
     // east wall
     var eastGeometry = new THREE.BoxGeometry (20, 200, 800);
-    var eastMaterial = new THREE.MeshBasicMaterial({color: 0x42f77b}); //Green Wall TEST
+    var eastMaterial = new THREE.MeshBasicMaterial({color: 0xC0C0C0}); 
     var eastwall = new THREE.Mesh (eastGeometry, eastMaterial);
-    eastwall.color = new THREE.Color(0x4B6DC5);
+    eastwall.color = new THREE.Color(0xFFEFD5);
     eastwall.position.x-=400;
     eastwall.position.y=100;
     eastwall.position.z=10;
     eastwall.receiveshadow = true;
     // north wall
     var northGeometry = new THREE.BoxGeometry (800, 200, 20);
-    var northMaterial = new THREE.MeshBasicMaterial({color: 0xab35ea}); //Purple Wall TEST
+    var northMaterial = new THREE.MeshBasicMaterial({color: 0xC0C0C0}); 
     var northwall = new THREE.Mesh (northGeometry, northMaterial);
-    northwall.color = new THREE.Color(0x4BC56D);
+    northwall.color = new THREE.Color(0xFFEFD5);
     northwall.position.x=00;
     northwall.position.y=100;
     northwall.position.z-=400;
     northwall.receiveshadow = true;
     // south wall left
     var south1Geometry = new THREE.BoxGeometry (350, 200, 20);
-    var south1Material = new THREE.MeshBasicMaterial({color: 0xf4683d}); //Orange Wall Test
+    var south1Material = new THREE.MeshBasicMaterial({color: 0xC0C0C0}); 
     var south1wall = new THREE.Mesh (south1Geometry, south1Material);
     south1wall.position.x-=225;
     south1wall.position.y=100;
@@ -100,7 +100,7 @@
     south1wall.receiveshadow = true;
     // south wall right
     var south2Geometry = new THREE.BoxGeometry (350, 200, 20);
-    var south2Material = new THREE.MeshBasicMaterial({color: 0xf4683d}); //Orange Wall Test
+    var south2Material = new THREE.MeshBasicMaterial({color: 0xC0C0C0}); 
     var south2wall = new THREE.Mesh (south2Geometry, south2Material);
     south2wall.position.x+=225;
     south2wall.position.y=100;
@@ -108,30 +108,30 @@
     south2wall.receiveshadow = true;
     //floor
     var floorGeometry = new THREE.BoxGeometry (800, 20, 800);
-    var floorMaterial = new THREE.MeshBasicMaterial({color: 0xe1ff89}), //House Floor Yellow
+    var floorMaterial = new THREE.MeshBasicMaterial({color: 0xEEE8AA}), 
     floor = new THREE.Mesh (floorGeometry, floorMaterial);
     floor.position.set(0, 0, 0);
     //Hallway
     var eHallGeometry = new THREE.BoxGeometry (25, 200, 250);
-    var eHallMaterial = new THREE.MeshBasicMaterial({color: 0x42f4d1}); //East Wall Hallway
+    var eHallMaterial = new THREE.MeshBasicMaterial({color: 0xC0C0C0}); //East Wall Hallway
     var eHall = new THREE.Mesh (eHallGeometry, eHallMaterial);
     eHall.position.x-=50;
     eHall.position.y+=100;
     eHall.position.z+=280;
     var wHallGeometry = new THREE.BoxGeometry (25, 200, 400);
-    var wHallMaterial = new THREE.MeshBasicMaterial({color: 0x1f6b5c}); //West Wall Hallway
+    var wHallMaterial = new THREE.MeshBasicMaterial({color: 0xC0C0C0}); //West Wall Hallway
     var wHall = new THREE.Mesh (wHallGeometry, wHallMaterial);
     wHall.position.x+=50;
     wHall.position.y+=100;
     wHall.position.z+=200;
     var room1HallGeometry = new THREE.BoxGeometry (250, 200, 25);
-    var room1HallMaterial = new THREE.MeshBasicMaterial({color: 0x241d63}); //Right Room
+    var room1HallMaterial = new THREE.MeshBasicMaterial({color: 0xC0C0C0}); //Right Room
     var room1Hall = new THREE.Mesh (room1HallGeometry, room1HallMaterial);
     room1Hall.position.x+=280;
     room1Hall.position.y+=100;
     room1Hall.position.z+=25;
     var room2HallGeometry = new THREE.BoxGeometry (350, 200, 25);
-    var room2HallMaterial = new THREE.MeshBasicMaterial({color: 0x1f6b5c}); //Left room
+    var room2HallMaterial = new THREE.MeshBasicMaterial({color: 0xC0C0C0}); //Left room
     var room2Hall = new THREE.Mesh (room2HallGeometry, room2HallMaterial);
     room2Hall.position.x-=225;
     room2Hall.position.y+=100;
@@ -140,14 +140,14 @@
     // NATURE
     // External Light Object (Sun)
     var sunGeometry = new THREE.SphereBufferGeometry(100, 100, 100);
-    var sunMaterial = new THREE.MeshBasicMaterial({color: 0xffff00});
+    var sunMaterial = new THREE.MeshBasicMaterial({color: 0xFFFF00});
     var sun = new THREE.Mesh(sunGeometry, sunMaterial);
     sun.castshadow = true;
     sun.receiveshadow = false;
     sun.position.set(-800, 800, 0);
     //land
-    var landGeometry = new THREE.PlaneGeometry (2000, 2000, 1, 1);
-    var landMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.DoubleSide}); //Green Grass Floor
+    var landGeometry = new THREE.BoxGeometry (2000, 2000, 10);
+    var landMaterial = new THREE.MeshBasicMaterial({color: 0xADFF2F, side: THREE.DoubleSide}); //Green Grass Floor
     var land = new THREE.Mesh (landGeometry, landMaterial);
     land.rotation.x = Math.PI/2;
 
@@ -217,7 +217,7 @@
 
 
 
-    //Group Walls
+    //Scene Groups
     var house = new THREE.Group();
     house.add(south1wall);
     house.add(south2wall);
@@ -231,17 +231,19 @@
     walls.add(room1Hall);
     walls.add(room2Hall);
 
-    //Add to scene
     scene.add(house, walls, land, sun);
 
     //CAMERA
     var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 2, 5000);
-    //camera.position.set(0, 0, 15);
     camera.position.set(0, 1700 , 0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     //CONTROLS
     controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.minPolarAngle = 0.5; //Minimal Rotation Lock
+    controls.maxPolarAngle = Math.PI / 2; //Max Rotation Lock
+   // controls.minDistance = 0;
+    //controls.maxDistance = 100;
     controls.update();
     var cameralight = new THREE.PointLight(new THREE.Color(1,1,1), 1);
     camera.add(cameralight);
