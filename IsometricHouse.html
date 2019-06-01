@@ -154,7 +154,7 @@
 
      //load a couch object and material
 
-    var mtlLoader = new THREE.MTLLoader();
+    /*var mtlLoader = new THREE.MTLLoader();
 
     mtlLoader.load("models/sofa/sofa.mtl", function(materials){
 
@@ -169,7 +169,7 @@
         scene.add(mesh);
 
         });
-    });
+    });*/
 
 
      //load a bed object and material
@@ -309,7 +309,7 @@ function buildGui() {
     Cube:function(){ CubeSpawner() }
   };
   var Sofa = {
-    Sofa:function() { CubeSpawner() }
+    Sofa:function() { SofaSpawner() }
   };
   var gOn = {
     gridOn:function(){ enableGrid() }
@@ -378,6 +378,28 @@ function CubeSpawner() {
       scene.add(cube_mesh);
       RaycasterObjects.push(cube_mesh);
     }
+     
+function SofaSpawner(){
+         //load a couch object and material
+
+    var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/sofa/sofa.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/sofa/sofa.obj",function(mesh){
+        mesh.position.set(300, 0, 210);
+        mesh.rotation.y = 4.7;
+        mesh.scale.set(1, 1, 1);
+        scene.add(mesh);
+        RaycasterObjects.push(mesh);
+        });
+    });
+
+}
 
 //Grid
 var Gridsize = 1000;
