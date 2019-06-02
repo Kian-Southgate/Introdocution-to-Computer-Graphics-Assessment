@@ -24,7 +24,7 @@
       }
     </style>
     <div>
-        
+
     </div>
 
  <script>
@@ -194,10 +194,10 @@
     });
  var loader = new THREE.OBJLoader();
  var video = document.getElementById('video');
-	 
-	 
+
+
 	 loader.load('models/television/monitor.obj', function ( object){
-		 
+
 		 object.position.set(470, 50, 650);
 		 object.rotation.y = Math.PI / 2;
 		 object.rotation.x = 0;
@@ -217,9 +217,9 @@
 	}
 );
 	 var loader = new THREE.OBJLoader();
-	
-	
-	 
+
+
+
 	 loader.load('models/tvunit/table.obj', function ( object){
 		 object.position.set(50, 30, 260);
 		 object.rotation.y = 0;
@@ -238,11 +238,11 @@
 
 	}
 );
-	 
+
 	  var loader = new THREE.OBJLoader();
-	
-	
-	 
+
+
+
 	 loader.load('models/kitchen/Kitchen.obj', function ( object){
 		 object.position.set(330, 0, -275);
 		 object.rotation.y = Math.PI / 2;
@@ -261,11 +261,11 @@
 
 	}
 );
-	 
+
 	   var loader = new THREE.OBJLoader();
-	
-	
-	 
+
+
+
 	 loader.load('models/wardrobe/wardrobe.obj', function ( object){
 		 object.position.set(-380, 0, 450);
 		 object.rotation.y = Math.PI / 1;
@@ -284,7 +284,7 @@
 
 	}
 );
-	 
+
      //load a dining table object with same white material used for the bed
      var mtlLoader = new THREE.MTLLoader();
 
@@ -305,7 +305,7 @@
 
         });
     });
-	 
+
 	    var mtlLoader = new THREE.MTLLoader();
 
     mtlLoader.load("models/sconcelight/eb_sconce_light_01.mtl", function(materials){
@@ -433,6 +433,19 @@ function buildGui() {
     table : false,
     wood : false,
     vinyl : false,
+    //FROM MASTER
+    bed : false,
+    cupboard : false,
+    tv : false,
+    bench : false,
+    sink : false,
+    grass : false,
+    concrete: false,
+    asphalt: false,
+    brick: false,
+    render: false,
+    tiles: false,
+    timberFloor: false,
   }
   var Cube = {
     Cube:function(){ CubeSpawner() }
@@ -460,11 +473,26 @@ function buildGui() {
     var mod_drop = gui.addFolder("Models");
     mod_drop.add(Cube,'Cube');
     mod_drop.add(Sofa,'Sofa');
-
+    //FROM MASTER
+    mod_drop.add(params,'bed').name("Bed");
+    mod_drop.add(params,'cupboard').name("Cupboard");
+    mod_drop.add(params,'tv').name("Television");
+    mod_drop.add(params,'bench').name("Kitchen bench");
+    mod_drop.add(params,'sink').name("Kitchen sink");
 
     var tex_drop = gui.addFolder("Textures");
     tex_drop.add(Camo,'Camo');
     tex_drop.add(Bw,'BlackWhite');
+    //FROM MASTER
+    tex_drop.add(params, 'grass').name("Grass"); //land
+    tex_drop.add(params, 'concrete').name("Concrete"); //land
+    tex_drop.add(params, 'asphalt').name("Asphalt"); //land
+
+    tex_drop.add(params, 'brick').name("Brick"); //houseWall
+    tex_drop.add(params, 'render').name("Cement Render"); //houseWall
+
+    tex_drop.add(params, 'tiles').name("Tiles"); //houseFloor
+    tex_drop.add(params, 'timberFloor').name("Timber Flooring"); //houseFloor
 
     var func_drop = gui.addFolder("Functions");
 
@@ -507,7 +535,7 @@ function CubeSpawner() {
       scene.add(cube_mesh);
       RaycasterObjects.push(cube_mesh);
     }
-     
+
 function SofaSpawner(){
          //load a couch object and material
 
