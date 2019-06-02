@@ -13,6 +13,12 @@
     <script src="js/OBJLoader.js"></script>
     <!--The material loader-->
     <script src="js/MTLLoader.js"></script>
+	<script>
+	floorGrass = true;
+	floorConcrete = false;
+		  
+		  
+	</script>
 
     <style>
     body {
@@ -140,6 +146,7 @@
     room1Hall.position.z+=25;
     var room2HallGeometry = new THREE.BoxGeometry (350, 200, 25);
     var room2HallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //Left room
+	var room2HallMaterial2 = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick2.jpg")});
     var room2Hall = new THREE.Mesh (room2HallGeometry, room2HallMaterial);
     room2Hall.position.x-=225;
     room2Hall.position.y+=100;
@@ -156,6 +163,7 @@
     //land
     var landGeometry = new THREE.BoxGeometry (2000, 2000, 10);
     var landMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/grass.jpg")}); //Green Grass Floor (Loaded Grass Texture)
+	var landMaterial2 = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/concrete.jpg")}); //Green Grass Floor (Loaded Grass Texture)
     var land = new THREE.Mesh (landGeometry, landMaterial);
 	 
     land.rotation.x = Math.PI/2;
@@ -180,6 +188,54 @@
 
         });
     });
+	 
+	 //load a television object and material
+	 var loader = new THREE.OBJLoader();
+	 
+	 loader.load('models/television/monitor.obj', function ( object){
+		 object.position.set(520, 50, 575);
+		 object.rotation.y = Math.PI / 2;
+		 object.rotation.x = 0;
+		 object.scale.set(3, 3, 3);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+	 var loader = new THREE.OBJLoader();
+	 
+	 loader.load('models/tvunit/table.obj', function ( object){
+		 object.position.set(105, 30, 185);
+		 object.rotation.y = 0;
+		 object.scale.set(0.5, 0.5, 0.5);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+			   
+
+	 
+	 
+	 var ob
 
 
      //load a bed object and material
@@ -306,6 +362,11 @@
 
 //GUI
   buildGui();
+	 
+var concrete = function()
+	 {
+		 mesh.material=landMaterial2;
+	 }
 
 function buildGui() {
   var params = {
