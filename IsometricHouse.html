@@ -16,8 +16,8 @@
 	<script>
 	floorGrass = true;
 	floorConcrete = false;
-		  
-		  
+
+
 	</script>
 
     <style>
@@ -110,7 +110,7 @@
     south1wall.position.y=100;
     south1wall.position.z+=400;
     south1wall.receiveshadow = true;
-	 
+
     // south wall right
     var south2Geometry = new THREE.BoxGeometry (350, 200, 20);
     var south2Material = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
@@ -119,7 +119,7 @@
     south2wall.position.y=100;
     south2wall.position.z+=400;
     south2wall.receiveshadow = true;
-	 
+
     //floor
     var floorGeometry = new THREE.BoxGeometry (800, 20, 800);
     var floorMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/timberfloor2.jpg")}),
@@ -165,7 +165,7 @@
     var landMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/grass.jpg")}); //Green Grass Floor (Loaded Grass Texture)
 	var landMaterial2 = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/concrete.jpg")}); //Green Grass Floor (Loaded Grass Texture)
     var land = new THREE.Mesh (landGeometry, landMaterial);
-	 
+
     land.rotation.x = Math.PI/2;
 
     scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9)); //add light to see interior
@@ -188,10 +188,10 @@
 
         });
     });
-	 
+
 	 //load a television object and material
 	 var loader = new THREE.OBJLoader();
-	 
+
 	 loader.load('models/television/monitor.obj', function ( object){
 		 object.position.set(520, 50, 575);
 		 object.rotation.y = Math.PI / 2;
@@ -212,9 +212,9 @@
 	}
 );
 	 var loader = new THREE.OBJLoader();
-	
-	
-	 
+
+
+
 	 loader.load('models/tvunit/table.obj', function ( object){
 		 object.position.set(105, 30, 185);
 		 object.rotation.y = 0;
@@ -233,11 +233,11 @@
 
 	}
 );
-	 
+
 	  var loader = new THREE.OBJLoader();
-	
-	
-	 
+
+
+
 	 loader.load('models/kitchen/Kitchen.obj', function ( object){
 		 object.position.set(250, 0, -200);
 		 object.rotation.y = Math.PI / 2;
@@ -256,11 +256,11 @@
 
 	}
 );
-	 
+
 	   var loader = new THREE.OBJLoader();
-	
-	
-	 
+
+
+
 	 loader.load('models/wardrobe/wardrobe.obj', function ( object){
 		 object.position.set(-285, 0, 380);
 		 object.rotation.y = Math.PI / 1;
@@ -279,11 +279,11 @@
 
 	}
 );
-		
-			   
 
-	 
-	 
+
+
+
+
 	 var ob
 
 
@@ -411,7 +411,7 @@
 
 //GUI
   buildGui();
-	 
+
 var concrete = function()
 	 {
 		 mesh.material=landMaterial2;
@@ -420,14 +420,19 @@ var concrete = function()
 function buildGui() {
   var params = {
     sofa : false,
+    bed : false,
     table : false,
-	grass : false,
-	concrete: false,
-	asphalt: false,
-	brick: false,
-	render: false,
-	tiles: false,
-	timberFloor: false,
+    cupboard : false,
+    tv : false,
+    bench : false,
+    sink : false,
+	  grass : false,
+	  concrete: false,
+	  asphalt: false,
+	  brick: false,
+	  render: false,
+	  tiles: false,
+	  timberFloor: false,
   }
 
   window.onload = function(){
@@ -436,23 +441,28 @@ function buildGui() {
     var mod_drop = gui.addFolder("Models");
 
     mod_drop.add(params,'sofa').name("Sofa");
-    mod_drop.add(params,'table').name("Table");
-	  
-	var land_drop = gui.addFolder("Land");
+    mod_drop.add(params,'bed').name("Bed");
+    mod_drop.add(params,'table').name("Dining table");
+    mod_drop.add(params,'cupboard').name("Cupboard");
+    mod_drop.add(params,'tv').name("Television");
+    mod_drop.add(params,'bench').name("Kitchen bench");
+    mod_drop.add(params,'sink').name("Kitchen sink");
+
+	  var land_drop = gui.addFolder("Land");
 
     land_drop.add(params, 'grass').name("Grass");
     land_drop.add(params, 'concrete').name("Concrete");
-	land_drop.add(params, 'asphalt').name("Asphalt");
-	  
-	var houseWall_drop = gui.addFolder("House Walls");
-	houseWall_drop.add(params, 'brick').name("Brick");
-	houseWall_drop.add(params, 'render').name("Cement Render");
-	  
-	var houseFloor_drop = gui.addFolder("House Floor");
-	houseFloor_drop.add(params, 'tiles').name("Tiles");
-	houseFloor_drop.add(params, 'timberFloor').name("Timber Flooring");
+	  land_drop.add(params, 'asphalt').name("Asphalt");
 
+	  var houseWall_drop = gui.addFolder("House Walls");
 
+	  houseWall_drop.add(params, 'brick').name("Brick");
+	  houseWall_drop.add(params, 'render').name("Cement Render");
+
+	  var houseFloor_drop = gui.addFolder("House Floor");
+
+	  houseFloor_drop.add(params, 'tiles').name("Tiles");
+	  houseFloor_drop.add(params, 'timberFloor').name("Timber Flooring");
 
     gui.open();
   }
