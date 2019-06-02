@@ -13,18 +13,36 @@
     <script src="js/OBJLoader.js"></script>
     <!--The material loader-->
     <script src="js/MTLLoader.js"></script>
-
-
-
+	<script>
+	floorGrass = true;
+	floorConcrete = false;
+		  
+		  
+	</script>
 
     <style>
-      body {
-        font-family: ;
-
-      }
+    body {
+          font-family: Monospace;
+          background-color: #000;
+          color: #000;
+          margin: 0px;
+          overflow: hidden;
+        }
+        #info {
+          position: absolute;
+          top: 10px;
+          width: 100%;
+          text-align: center;
+        }
     </style>
+<<<<<<< HEAD
     <div>
         
+=======
+    <div id="info">
+        <p> Isometric House <br>
+        By Kian Southgate, Andy Lang, Jonathan Mifsud, Feras Sleiman & Max Simons </p>
+>>>>>>> master
     </div>
 
  <script>
@@ -63,8 +81,13 @@
 
     // HOUSE
     // west wall
+<<<<<<< HEAD
     var westGeometry = new THREE.BoxGeometry (20, 200, 1000);
     var westMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
+=======
+    var westGeometry = new THREE.BoxGeometry (20, 200, 800);
+    var westMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
+>>>>>>> master
     var westwall = new THREE.Mesh (westGeometry, westMaterial);
     westwall.color = new THREE.Color(1, 0, 1);
     westwall.position.x-=500;
@@ -72,8 +95,13 @@
     westwall.position.z=10;
     westwall.receiveshadow = true;
     // east wall
+<<<<<<< HEAD
     var eastGeometry = new THREE.BoxGeometry (20, 200, 1000);
     var eastMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
+=======
+    var eastGeometry = new THREE.BoxGeometry (20, 200, 800);
+    var eastMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
+>>>>>>> master
     var eastwall = new THREE.Mesh (eastGeometry, eastMaterial);
     eastwall.color = new THREE.Color(0xFFEFD5);
     eastwall.position.x+=500;
@@ -81,8 +109,13 @@
     eastwall.position.z=10;
     eastwall.receiveshadow = true;
     // north wall
+<<<<<<< HEAD
     var northGeometry = new THREE.BoxGeometry (1000, 200, 20);
     var northMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
+=======
+    var northGeometry = new THREE.BoxGeometry (800, 200, 20);
+    var northMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
+>>>>>>> master
     var northwall = new THREE.Mesh (northGeometry, northMaterial);
     northwall.color = new THREE.Color(0xFFEFD5);
     northwall.position.x=00;
@@ -90,22 +123,35 @@
     northwall.position.z-=500;
     northwall.receiveshadow = true;
     // south wall left
+<<<<<<< HEAD
     var south1Geometry = new THREE.BoxGeometry (400, 200, 20);
     var south1Material = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
+=======
+    var south1Geometry = new THREE.BoxGeometry (350, 200, 20);
+    var south1Material = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
+>>>>>>> master
     var south1wall = new THREE.Mesh (south1Geometry, south1Material);
     south1wall.position.x-=300;
     south1wall.position.y=100;
     south1wall.position.z+=500;
     south1wall.receiveshadow = true;
+	 
     // south wall right
+<<<<<<< HEAD
     var south2Geometry = new THREE.BoxGeometry (500, 200, 20);
     var south2Material = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
+=======
+    var south2Geometry = new THREE.BoxGeometry (350, 200, 20);
+    var south2Material = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
+>>>>>>> master
     var south2wall = new THREE.Mesh (south2Geometry, south2Material);
     south2wall.position.x+=250;
     south2wall.position.y=100;
     south2wall.position.z+=500;
     south2wall.receiveshadow = true;
+	 
     //floor
+<<<<<<< HEAD
     var floorGeometry = new THREE.BoxGeometry (1000, 20, 1000);
     var floorMaterial = new THREE.MeshLambertMaterial({color: 0xEEE8AA}),
     floor = new THREE.Mesh (floorGeometry, floorMaterial);
@@ -113,24 +159,52 @@
     //Hallway
     var eHallGeometry = new THREE.BoxGeometry (25, 200, 400);
     var eHallMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); //East Wall Hallway
+=======
+    var floorGeometry = new THREE.BoxGeometry (800, 20, 800);
+    var floorMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/timberfloor2.jpg")}),
+    floor = new THREE.Mesh (floorGeometry, floorMaterial);
+    floor.position.set(0, 0, 0);
+    //Hallway
+    var eHallGeometry = new THREE.BoxGeometry (25, 200, 250);
+    var eHallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //East Wall Hallway
+>>>>>>> master
     var eHall = new THREE.Mesh (eHallGeometry, eHallMaterial);
     eHall.position.x-=100;
     eHall.position.y+=100;
+<<<<<<< HEAD
     eHall.position.z+=300;
     var wHallGeometry = new THREE.BoxGeometry (25, 200, 500);
     var wHallMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); //West Wall Hallway
+=======
+    eHall.position.z+=280;
+    var wHallGeometry = new THREE.BoxGeometry (25, 200, 400);
+    var wHallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //West Wall Hallway
+>>>>>>> master
     var wHall = new THREE.Mesh (wHallGeometry, wHallMaterial);
     wHall.position.x=0;
     wHall.position.y+=100;
+<<<<<<< HEAD
     wHall.position.z+=250;
     var room1HallGeometry = new THREE.BoxGeometry (400, 200, 25);
     var room1HallMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); //Right Room
+=======
+    wHall.position.z+=200;
+    var room1HallGeometry = new THREE.BoxGeometry (250, 200, 25);
+    var room1HallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //Right Room
+>>>>>>> master
     var room1Hall = new THREE.Mesh (room1HallGeometry, room1HallMaterial);
     room1Hall.position.x+=300;
     room1Hall.position.y+=100;
+<<<<<<< HEAD
     room1Hall.position.z=0;
     var room2HallGeometry = new THREE.BoxGeometry (400, 200, 25);
     var room2HallMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); //Left room
+=======
+    room1Hall.position.z+=25;
+    var room2HallGeometry = new THREE.BoxGeometry (350, 200, 25);
+    var room2HallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //Left room
+	var room2HallMaterial2 = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick2.jpg")});
+>>>>>>> master
     var room2Hall = new THREE.Mesh (room2HallGeometry, room2HallMaterial);
     room2Hall.position.x-=300;
     room2Hall.position.y+=100;
@@ -139,15 +213,25 @@
     // NATURE
     // External Light Object (Sun)
     var sunGeometry = new THREE.SphereBufferGeometry(100, 100, 100);
+<<<<<<< HEAD
     var sunMaterial = new THREE.MeshLambertMaterial({color: 0xFFFF00});
+=======
+    var sunMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/sun.jpg")});
+>>>>>>> master
     var sun = new THREE.Mesh(sunGeometry, sunMaterial);
     sun.castshadow = true;
     sun.receiveshadow = false;
     sun.position.set(-800, 800, 0);
     //land
     var landGeometry = new THREE.BoxGeometry (2000, 2000, 10);
+<<<<<<< HEAD
     var landMaterial = new THREE.MeshLambertMaterial({color: 0xADFF2F, side: THREE.DoubleSide}); //Green Grass Floor
+=======
+    var landMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/grass.jpg")}); //Green Grass Floor (Loaded Grass Texture)
+	var landMaterial2 = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/concrete.jpg")}); //Green Grass Floor (Loaded Grass Texture)
+>>>>>>> master
     var land = new THREE.Mesh (landGeometry, landMaterial);
+	 
     land.rotation.x = Math.PI/2;
 
     scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9)); //add light to see interior
@@ -169,7 +253,108 @@
         scene.add(mesh);
 
         });
+<<<<<<< HEAD
     });*/
+=======
+    });
+	 
+	 //load a television object and material
+	 var loader = new THREE.OBJLoader();
+	 
+	 loader.load('models/television/monitor.obj', function ( object){
+		 object.position.set(520, 50, 575);
+		 object.rotation.y = Math.PI / 2;
+		 object.rotation.x = 0;
+		 object.scale.set(3, 3, 3);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+	 var loader = new THREE.OBJLoader();
+	
+	
+	 
+	 loader.load('models/tvunit/table.obj', function ( object){
+		 object.position.set(105, 30, 185);
+		 object.rotation.y = 0;
+		 object.scale.set(0.5, 0.5, 0.5);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+	 
+	  var loader = new THREE.OBJLoader();
+	
+	
+	 
+	 loader.load('models/kitchen/Kitchen.obj', function ( object){
+		 object.position.set(250, 0, -200);
+		 object.rotation.y = Math.PI / 2;
+		 object.scale.set(50, 50, 50);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+	 
+	   var loader = new THREE.OBJLoader();
+	
+	
+	 
+	 loader.load('models/wardrobe/wardrobe.obj', function ( object){
+		 object.position.set(-285, 0, 380);
+		 object.rotation.y = Math.PI / 1;
+		 object.scale.set(43, 43, 43);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+		
+			   
+
+	 
+	 
+	 var ob
+>>>>>>> master
 
 
      //load a bed object and material
@@ -297,13 +482,23 @@
 //GUI
 //GUI
   buildGui();
+	 
+var concrete = function()
+	 {
+		 mesh.material=landMaterial2;
+	 }
 
 function buildGui() {
   var params = {
     sofa : false,
     table : false,
-    wood : false,
-    vinyl : false,
+	grass : false,
+	concrete: false,
+	asphalt: false,
+	brick: false,
+	render: false,
+	tiles: false,
+	timberFloor: false,
   }
   var Cube = {
     Cube:function(){ CubeSpawner() }
@@ -326,12 +521,13 @@ function buildGui() {
   };
 
   window.onload = function(){
-    var gui = new dat.GUI({height: 2 * 32 - 1});
+    var gui = new dat.GUI({height: 2 * 50 - 1});
 
     var mod_drop = gui.addFolder("Models");
     mod_drop.add(Cube,'Cube');
     mod_drop.add(Sofa,'Sofa');
 
+<<<<<<< HEAD
 
     var tex_drop = gui.addFolder("Textures");
     tex_drop.add(Camo,'Camo');
@@ -341,6 +537,26 @@ function buildGui() {
 
     func_drop.add(gOn,'gridOn');
     func_drop.add(gOff,'gridOff');
+=======
+    mod_drop.add(params,'sofa').name("Sofa");
+    mod_drop.add(params,'table').name("Table");
+	  
+	var land_drop = gui.addFolder("Land");
+
+    land_drop.add(params, 'grass').name("Grass");
+    land_drop.add(params, 'concrete').name("Concrete");
+	land_drop.add(params, 'asphalt').name("Asphalt");
+	  
+	var houseWall_drop = gui.addFolder("House Walls");
+	houseWall_drop.add(params, 'brick').name("Brick");
+	houseWall_drop.add(params, 'render').name("Cement Render");
+	  
+	var houseFloor_drop = gui.addFolder("House Floor");
+	houseFloor_drop.add(params, 'tiles').name("Tiles");
+	houseFloor_drop.add(params, 'timberFloor').name("Timber Flooring");
+
+
+>>>>>>> master
 
     gui.open();
   }
