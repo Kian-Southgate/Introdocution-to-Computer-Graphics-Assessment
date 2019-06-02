@@ -64,7 +64,7 @@
     // HOUSE
     // west wall
     var westGeometry = new THREE.BoxGeometry (20, 200, 1000);
-    var westMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
+    var westMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
     var westwall = new THREE.Mesh (westGeometry, westMaterial);
     westwall.color = new THREE.Color(1, 0, 1);
     westwall.position.x-=500;
@@ -73,7 +73,7 @@
     westwall.receiveshadow = true;
     // east wall
     var eastGeometry = new THREE.BoxGeometry (20, 200, 1000);
-    var eastMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
+    var eastMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
     var eastwall = new THREE.Mesh (eastGeometry, eastMaterial);
     eastwall.color = new THREE.Color(0xFFEFD5);
     eastwall.position.x+=500;
@@ -82,7 +82,7 @@
     eastwall.receiveshadow = true;
     // north wall
     var northGeometry = new THREE.BoxGeometry (1000, 200, 20);
-    var northMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
+    var northMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
     var northwall = new THREE.Mesh (northGeometry, northMaterial);
     northwall.color = new THREE.Color(0xFFEFD5);
     northwall.position.x=00;
@@ -91,7 +91,7 @@
     northwall.receiveshadow = true;
     // south wall left
     var south1Geometry = new THREE.BoxGeometry (400, 200, 20);
-    var south1Material = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
+    var south1Material = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
     var south1wall = new THREE.Mesh (south1Geometry, south1Material);
     south1wall.position.x-=300;
     south1wall.position.y=100;
@@ -99,7 +99,7 @@
     south1wall.receiveshadow = true;
     // south wall right
     var south2Geometry = new THREE.BoxGeometry (500, 200, 20);
-    var south2Material = new THREE.MeshLambertMaterial({color: 0xC0C0C0});
+    var south2Material = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
     var south2wall = new THREE.Mesh (south2Geometry, south2Material);
     south2wall.position.x+=250;
     south2wall.position.y=100;
@@ -107,30 +107,30 @@
     south2wall.receiveshadow = true;
     //floor
     var floorGeometry = new THREE.BoxGeometry (1000, 20, 1000);
-    var floorMaterial = new THREE.MeshLambertMaterial({color: 0xEEE8AA}),
+    var floorMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/timberfloor2.jpg")});
     floor = new THREE.Mesh (floorGeometry, floorMaterial);
     floor.position.set(0, 0, 0);
     //Hallway
     var eHallGeometry = new THREE.BoxGeometry (25, 200, 400);
-    var eHallMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); //East Wall Hallway
+    var eHallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //East Wall Hallway
     var eHall = new THREE.Mesh (eHallGeometry, eHallMaterial);
     eHall.position.x-=100;
     eHall.position.y+=100;
     eHall.position.z+=300;
     var wHallGeometry = new THREE.BoxGeometry (25, 200, 500);
-    var wHallMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); //West Wall Hallway
+    var wHallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});//West Wall Hallway
     var wHall = new THREE.Mesh (wHallGeometry, wHallMaterial);
     wHall.position.x=0;
     wHall.position.y+=100;
     wHall.position.z+=250;
     var room1HallGeometry = new THREE.BoxGeometry (400, 200, 25);
-    var room1HallMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); //Right Room
+    var room1HallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //Right Room
     var room1Hall = new THREE.Mesh (room1HallGeometry, room1HallMaterial);
     room1Hall.position.x+=300;
     room1Hall.position.y+=100;
     room1Hall.position.z=0;
     var room2HallGeometry = new THREE.BoxGeometry (400, 200, 25);
-    var room2HallMaterial = new THREE.MeshLambertMaterial({color: 0xC0C0C0}); //Left room
+    var room2HallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //Left room
     var room2Hall = new THREE.Mesh (room2HallGeometry, room2HallMaterial);
     room2Hall.position.x-=300;
     room2Hall.position.y+=100;
@@ -139,14 +139,14 @@
     // NATURE
     // External Light Object (Sun)
     var sunGeometry = new THREE.SphereBufferGeometry(100, 100, 100);
-    var sunMaterial = new THREE.MeshLambertMaterial({color: 0xFFFF00});
+    var sunMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/sun.jpg")});
     var sun = new THREE.Mesh(sunGeometry, sunMaterial);
     sun.castshadow = true;
     sun.receiveshadow = false;
     sun.position.set(-800, 800, 0);
     //land
     var landGeometry = new THREE.BoxGeometry (2000, 2000, 10);
-    var landMaterial = new THREE.MeshLambertMaterial({color: 0xADFF2F, side: THREE.DoubleSide}); //Green Grass Floor
+    var landMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/grass.jpg"), side: THREE.DoubleSide}); //Green Grass Floor
     var land = new THREE.Mesh (landGeometry, landMaterial);
     land.rotation.x = Math.PI/2;
 
@@ -192,7 +192,95 @@
 
         });
     });
+ var loader = new THREE.OBJLoader();
+	 
+	 loader.load('models/television/monitor.obj', function ( object){
+		 object.position.set(470, 50, 650);
+		 object.rotation.y = Math.PI / 2;
+		 object.rotation.x = 0;
+		 object.scale.set(3, 3, 3);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
 
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+	 var loader = new THREE.OBJLoader();
+	
+	
+	 
+	 loader.load('models/tvunit/table.obj', function ( object){
+		 object.position.set(50, 30, 260);
+		 object.rotation.y = 0;
+		 object.scale.set(0.5, 0.5, 0.5);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+	 
+	  var loader = new THREE.OBJLoader();
+	
+	
+	 
+	 loader.load('models/kitchen/Kitchen.obj', function ( object){
+		 object.position.set(330, 0, -275);
+		 object.rotation.y = Math.PI / 2;
+		 object.scale.set(60, 60, 60);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+	 
+	   var loader = new THREE.OBJLoader();
+	
+	
+	 
+	 loader.load('models/wardrobe/wardrobe.obj', function ( object){
+		 object.position.set(-380, 0, 450);
+		 object.rotation.y = Math.PI / 1;
+		 object.scale.set(43, 43, 43);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
      //load a dining table object with same white material used for the bed
      var mtlLoader = new THREE.MTLLoader();
 
