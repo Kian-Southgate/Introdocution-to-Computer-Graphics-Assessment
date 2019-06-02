@@ -15,7 +15,7 @@
     <script src="js/MTLLoader.js"></script>
 
 
-
+<video id="video" style="display: none; position: absolute: left: 15px; top: 75px;" src="videos/TV.mp4" controls="true" autoplay="true"></video>
 
     <style>
       body {
@@ -193,8 +193,11 @@
         });
     });
  var loader = new THREE.OBJLoader();
+ var video = document.getElementById('video');
+	 
 	 
 	 loader.load('models/television/monitor.obj', function ( object){
+		 
 		 object.position.set(470, 50, 650);
 		 object.rotation.y = Math.PI / 2;
 		 object.rotation.x = 0;
@@ -281,6 +284,7 @@
 
 	}
 );
+	 
      //load a dining table object with same white material used for the bed
      var mtlLoader = new THREE.MTLLoader();
 
@@ -297,6 +301,43 @@
         mesh.rotation.z = Math.PI;
         mesh.rotation.x = Math.PI;
         mesh.scale.set(1.4, 1.4, 1.4);
+        scene.add(mesh);
+
+        });
+    });
+	 
+	    var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/sconcelight/eb_sconce_light_01.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/sconcelight/eb_sconce_light_01.obj",function(mesh){
+           //need to change position and make bed flat with floor
+        mesh.position.set(150, 150, 0);
+        mesh.rotation.y = Math.PI;
+        mesh.rotation.z = Math.PI;
+        mesh.rotation.x = Math.PI;
+        mesh.scale.set(2, 2, 2);
+        scene.add(mesh);
+
+        });
+    });
+	     mtlLoader.load("models/sconcelight/eb_sconce_light_01.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/sconcelight/eb_sconce_light_01.obj",function(mesh){
+           //need to change position and make bed flat with floor
+        mesh.position.set(-150, 150, 0);
+        mesh.rotation.y = Math.PI;
+        mesh.rotation.z = Math.PI;
+        mesh.rotation.x = Math.PI;
+        mesh.scale.set(2, 2, 2);
         scene.add(mesh);
 
         });
@@ -620,6 +661,20 @@ var Gridsize = 1000;
           material_flower.color=  new THREE.Color(1,1,1);
           material_flower.map = flower_texture
           material_flower.wireframe=false;
+	  var controls = new function () {
+            this.showVideo = false;
+            this.rotate = false;
+            this.showCanvas = function () {
+                if (controls.showVideo) {
+                    $('#video').show();
+                } else {
+                    $('#video').hide();
+                }
+            }
+        };
+	 var gui = new dat.GUI();
+        gui.add(controls, "rotate");
+        gui.add(controls, "showVideo").onChange(controls.showCanvas);
 
 </script>
   </body>
