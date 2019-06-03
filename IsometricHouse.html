@@ -30,6 +30,10 @@
  <script>
 <!--INCLUDE PROGRAM CODE HERE-->
 
+	//Test Script
+	
+	
+	
     //SCENE
     var scene = new THREE.Scene();
     var ratio = window.innerWidth/window.innerHeight;
@@ -146,7 +150,7 @@
     sun.position.set(-800, 800, 0);
     //land
     var landGeometry = new THREE.BoxGeometry (2000, 2000, 10);
-    var landMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/grass.jpg"), side: THREE.DoubleSide}); //Green Grass Floor
+    var landMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('img/grass.jpg'), side: THREE.DoubleSide}); //Green Grass Floor
     var land = new THREE.Mesh (landGeometry, landMaterial);
     land.rotation.x = Math.PI/2;
 
@@ -182,7 +186,7 @@
         objLoader.setMaterials(materials);
 
         objLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj",function(mesh){
-        mesh.position.set(-300, 50, 150);
+        mesh.position.set(-335, 50, 120);
         mesh.rotation.y = Math.PI;
         mesh.rotation.z = Math.PI;
         mesh.rotation.x = Math.PI / 2;
@@ -216,14 +220,40 @@
 
 	}
 );
+	 
+	 
 	 var loader = new THREE.OBJLoader();
 
 
-
-	 loader.load('models/tvunit/table.obj', function ( object){
+	 loader.load('models/tvunit/table.obj', function (object){
+		 
 		 object.position.set(50, 30, 260);
 		 object.rotation.y = 0;
 		 object.scale.set(0.5, 0.5, 0.5);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+	 
+	 //office desk
+	  var loader = new THREE.OBJLoader();
+
+
+	 loader.load('models/officedesk/desk.obj', function (object){
+		 
+		 object.position.set(-100, 0, -430);
+		 object.rotation.y = 0;
+		 object.scale.set(0.45, 0.45, 0.45);
 		 scene.add (object);
 	 },
 				 	function ( xhr ) {
@@ -261,6 +291,79 @@
 
 	}
 );
+	 //beside table
+	 var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/bedsidetable/bedsidemtl.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/bedsidetable/bedsideobj.obj",function(mesh){
+        mesh.position.set(-450, 0, 80);
+        mesh.rotation.y = 0;
+        mesh.scale.set(25, 25, 25);
+        scene.add(mesh);
+
+        });
+    });
+	 
+	 //office chair
+	  var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/officechair/model.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/officechair/model.obj",function(mesh){
+        mesh.position.set(-30, 10, -360);
+        mesh.rotation.y = Math.PI / 1
+		mesh.rotation.x = Math.PI / 2;
+        mesh.scale.set(1, 1, 1);
+        scene.add(mesh);
+
+        });
+    });
+	 
+	  //Modern Closet
+	  var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/minicupboard/modern_closet.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/minicupboard/modern_closet.obj",function(mesh){
+        mesh.position.set(0, 200, 0);
+        mesh.rotation.y = 0;
+		mesh.rotation.x = 0;
+        mesh.scale.set(100, 100, 100);
+        scene.add(mesh);
+
+        });
+    });
+	 
+	 var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/sofa2/sofa.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/sofa2/sofa.obj",function(mesh){
+        mesh.position.set(250, 0, 250);
+        mesh.rotation.y = 600;
+        mesh.scale.set(9, 9, 9);
+        scene.add(mesh);
+
+        });
+    });
+
 
 	   var loader = new THREE.OBJLoader();
 
@@ -296,8 +399,8 @@
 
         objLoader.load("models/dining_table/Minimalist Dining Table.obj",function(mesh){
            //need to change position and make bed flat with floor
-        mesh.position.set(-250, 0, -200);
-        mesh.rotation.y = Math.PI;
+        mesh.position.set(-350, 0, -150);
+        mesh.rotation.y = Math.PI / 2;
         mesh.rotation.z = Math.PI;
         mesh.rotation.x = Math.PI;
         mesh.scale.set(1.4, 1.4, 1.4);
@@ -675,6 +778,7 @@ var Gridsize = 1000;
       var bw_texture = new THREE.TextureLoader().load('texture/bw.jpg');
       var flower_texture = new THREE.TextureLoader().load('texture/flowers.jpg');
 
+	  
       var material_camo = new THREE.MeshPhongMaterial();
           material_camo.color=  new THREE.Color(1,1,1);
           material_camo.map = camo_texture;
