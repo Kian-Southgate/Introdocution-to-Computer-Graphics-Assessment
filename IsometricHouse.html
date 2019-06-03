@@ -160,7 +160,8 @@
 
      //load a couch object and material
 
-    /*var mtlLoader = new THREE.MTLLoader();
+  
+	 var mtlLoader = new THREE.MTLLoader();
 
     mtlLoader.load("models/sofa/sofa.mtl", function(materials){
 
@@ -175,8 +176,7 @@
         scene.add(mesh);
 
         });
-    });*/
-
+    });
 
      //load a bed object and material
      var mtlLoader = new THREE.MTLLoader();
@@ -198,6 +198,7 @@
 
         });
     });
+	
  var loader = new THREE.OBJLoader();
  var video = document.getElementById('video');
 
@@ -222,8 +223,7 @@
 
 	}
 );
-	 
-	 
+
 	 var loader = new THREE.OBJLoader();
 
 
@@ -247,7 +247,7 @@
 
 	}
 );
-	 
+
 	 //office desk
 	  var loader = new THREE.OBJLoader();
 
@@ -271,6 +271,7 @@
 
 	}
 );
+
 	 
 //kitchen
 	 var mtlLoader = new THREE.MTLLoader();
@@ -291,7 +292,7 @@
         });
     });
 	 
-	
+
 	 //beside table
 	 var mtlLoader = new THREE.MTLLoader();
 
@@ -309,7 +310,7 @@
 
         });
     });
-	 
+	
 	 //Plant
 	 var mtlLoader = new THREE.MTLLoader();
 
@@ -327,7 +328,7 @@
 
         });
     });
-	 
+	
 	 //car
 	 var mtlLoader = new THREE.MTLLoader();
 
@@ -405,8 +406,8 @@
 
         });
     });
-	 
-	 /* //dog
+	
+	  //dog
 	 var mtlLoader = new THREE.MTLLoader();
 
     mtlLoader.load("models/dog/12228_Dog_v1_L2.mtl", function(materials){
@@ -418,13 +419,13 @@
         objLoader.load("models/dog/12228_Dog_v1_L2.obj",function(mesh){
         mesh.position.set(-700, 0, 900);
         mesh.rotation.y = 0;
-		mesh.rotation.x = 2;
+		mesh.rotation.x = 0;
 		mesh.rotation.z = 0;
-        mesh.scale.set(2, 2, 2);
+        mesh.scale.set(2, 2, 1);
         scene.add(mesh);
 
         });
-    }); */
+    });
 	 
 	 //office chair
 	  var mtlLoader = new THREE.MTLLoader();
@@ -444,7 +445,9 @@
 
         });
     });
+	
 	 
+	
 	  //Modern Closet
 	  var mtlLoader = new THREE.MTLLoader();
 
@@ -463,6 +466,7 @@
 
         });
     });
+	 
 	 
 	  //Pool Table
 	  var mtlLoader = new THREE.MTLLoader();
@@ -483,25 +487,9 @@
 
         });
     });
-	 
-	 var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/sofa2/sofa.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/sofa2/sofa.obj",function(mesh){
-        mesh.position.set(250, 0, 250);
-        mesh.rotation.y = 600;
-        mesh.scale.set(9, 9, 9);
-        scene.add(mesh);
-
-        });
-    });
-
-
+	
+	
+/* Need to Find New one
 	   var loader = new THREE.OBJLoader();
 
 
@@ -524,6 +512,8 @@
 
 	}
 );
+*/
+
 
      //load a dining table object with same white material used for the bed
      var mtlLoader = new THREE.MTLLoader();
@@ -582,6 +572,8 @@
 
         });
     });
+	 
+	
 
 
 
