@@ -194,7 +194,7 @@
     var land = new THREE.Mesh (landGeometry, landMaterial);
     land.rotation.x = Math.PI/2;
 
-    scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9)); //add light to see interior
+    //scene.add(new THREE.AmbientLight(new THREE.Color(1.0,1.0,1.0), 0.9)); //add light to see interior
 
      //load a couch object and material
 
@@ -512,6 +512,10 @@ function buildGui() {
   var Office_Chair = {
       Office_Chair:function(){OfficeChairSpawner()}
   };
+    
+var Lamp = {
+    Lamp:function(){LampSpawner()}
+};
 
   var Remove = {
       REMOVE:function(){Remove_model()}
@@ -551,6 +555,7 @@ function buildGui() {
     mod_drop.add(Dining_Table, 'Dining_Table');
     mod_drop.add(Office_Desk, 'Office_Desk');
     mod_drop.add(Office_Chair,'Office_Chair');
+    mod_drop.add(Lamp, 'Lamp');
 
     //FROM MASTER
     /*mod_drop.add(params,'bed').name("Bed");
@@ -809,6 +814,44 @@ var cube_mesh_bedside_table = new THREE.Mesh(geometry_cube_bedside_table,tranMat
         });
     });
      }
+         
+    //LAMP
+    var lamp;
+         function LampSpawner(){
+             var geometry_cube_lamp = new THREE.BoxGeometry(100,360,100);
+
+var cube_mesh_lamp = new THREE.Mesh(geometry_cube_lamp,tranMaterial);
+    cube_mesh_lamp.position.set(0,5,0);
+     scene.add(cube_mesh_lamp);
+     RaycasterObjects.push(cube_mesh_lamp);
+     lamp = cube_mesh_lamp;
+//lamp
+	 var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/lamp/FloorLamp.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/lamp/FloorLamp.obj",function(lamp_mesh){
+       lamp_mesh.position.set(0, 5, 0);
+        //bedside_table_mesh.rotation.y = 0;
+        lamp_mesh.scale.set(15, 15, 15);
+       cube_mesh_lamp.add(lamp_mesh);
+            
+            var lamplight = new THREE.SpotLight(0xffffff);
+            lamplight.position.y = 200;
+            cube_mesh_lamp.add(lamplight);
+            
+            var lamplighthelper = new THREE.SpotLightHelper(lamplight);
+            scene.add(lamplighthelper);
+
+        });
+    });
+             
+         }
+     
 
 //Grid
 var Gridsize = 1000;
