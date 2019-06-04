@@ -190,8 +190,65 @@
 
 
     });*/
+	 
+ //tree 2
+	 var mtlLoader = new THREE.MTLLoader();
 
+    mtlLoader.load("models/tree2/Tree.mtl", function(materials){
 
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/tree2/Tree.obj",function(mesh){
+        mesh.position.set(-800, 0, 0);
+        mesh.rotation.y = Math.PI / 2;
+		mesh.rotation.x = 0;
+		mesh.rotation.z = 0;
+        mesh.scale.set(70, 70, 70);
+        scene.add(mesh);
+
+        });
+    });
+	  //Television and TV Unit
+     var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/Samsungtv/Samsung Smart TV 55 Zoll.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/Samsungtv/Samsung Smart TV 55 Zoll.obj",function(mesh){
+        mesh.position.set(50, 70, 250);
+        mesh.rotation.y = Math.PI / 2;
+        mesh.rotation.z = 0;
+        mesh.rotation.x = 0;
+        mesh.scale.set(20, 20, 20);
+           //need to change position and make bed flat with floor
+        scene.add(mesh);
+
+        });
+    });
+//car 2
+	 var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/car2/Touareg.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/car2/Touareg.obj",function(mesh){
+        mesh.position.set(-700, 0, 400);
+        mesh.rotation.y = Math.PI / 2;
+		mesh.rotation.x = 0;
+		mesh.rotation.z = 0;
+        mesh.scale.set(0.1, 0.1, 0.1);
+        scene.add(mesh);
+
+        });
+    });
 
 
 
