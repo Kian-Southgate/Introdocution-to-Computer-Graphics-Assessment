@@ -369,26 +369,7 @@
 	}
 );
 
-     //load a dining table object with same white material used for the bed
-     var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/dining_table/Minimalist Dining Table.obj",function(mesh){
-           //need to change position and make bed flat with floor
-        mesh.position.set(-350, 0, -150);
-        mesh.rotation.y = Math.PI / 2;
-        mesh.rotation.z = Math.PI;
-        mesh.rotation.x = Math.PI;
-        mesh.scale.set(1.4, 1.4, 1.4);
-        scene.add(mesh);
-
-        });
-    });
+     
 
 	    var mtlLoader = new THREE.MTLLoader();
 
@@ -540,6 +521,9 @@ function buildGui() {
     var Bed = {
         Bed:function(){BedSpawner()}
     };
+    var Dining_Table = {
+        Dining_Table(){DiningTableSpawner()}
+    };
   var gOn = {
     gridOn:function(){ enableGrid() }
   };
@@ -569,12 +553,13 @@ function buildGui() {
     mod_drop.add(Cube,'Cube');
     mod_drop.add(Sofa,'Sofa');
     mod_drop.add(Bed, 'Bed');
+    mod_drop.add(Dining_Table, 'Dining_Table');
     //FROM MASTER
-    mod_drop.add(params,'bed').name("Bed");
+    /*mod_drop.add(params,'bed').name("Bed");
     mod_drop.add(params,'cupboard').name("Cupboard");
     mod_drop.add(params,'tv').name("Television");
     mod_drop.add(params,'bench').name("Kitchen bench");
-    mod_drop.add(params,'sink').name("Kitchen sink");
+    mod_drop.add(params,'sink').name("Kitchen sink");*/
 
     var tex_drop = gui.addFolder("Textures");
     tex_drop.add(Camo,'Camo');
@@ -708,6 +693,37 @@ var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
         });
     });
 }
+     
+     var diningtable;
+     function DiningTableSpawner(){
+     //load a dining table object with same white material used for the bed
+     var geometry_cube_dining_table = new THREE.BoxGeometry(300,260,250);
+var cube_mesh_dining_table = new THREE.Mesh(geometry_cube_dining_table,tranMaterial);
+     cube_mesh_dining_table.position.set(-350,0,-150);
+     scene.add(cube_mesh_dining_table);
+     RaycasterObjects.push(cube_mesh_dining_table);
+     diningtable = cube_mesh_dining_table;
+         
+         var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/dining_table/Minimalist Dining Table.obj",function(dining_table_mesh){
+           //need to change position and make bed flat with floor
+        dining_table_mesh.position.set(0, 0, 0);
+        dining_table_mesh.rotation.y = Math.PI / 2;
+        dining_table_mesh.rotation.z = Math.PI;
+        dining_table_mesh.rotation.x = Math.PI;
+        dining_table_mesh.scale.set(1.4, 1.4, 1.4);
+       cube_mesh_dining_table.add(dining_table_mesh);
+
+        });
+    });
+     }
 
 //Grid
 var Gridsize = 1000;
