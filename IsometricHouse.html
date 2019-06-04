@@ -178,7 +178,7 @@
     });*/
 
 
-     
+
  var loader = new THREE.OBJLoader();
  var video = document.getElementById('video');
 
@@ -230,18 +230,18 @@
 );
 
 	 //office desk fbx loader fail
-	 /*var fbxloader = new THREE.FBXLoader(); 
+	 /*var fbxloader = new THREE.FBXLoader();
      fbxloader.load( 'models/officedesk/Desk.fbx', function ( object ){
           object.position.set(0, 0, 0);
 		 object.rotation.y = 0;
 		 object.scale.set(0.45, 0.45, 0.45);
-		 scene.add (object);   
+		 scene.add (object);
          console.log("where is the desk?");
-         
-                 
+
+
     });*/
 
-     
+
 
 
 	  var loader = new THREE.OBJLoader();
@@ -266,9 +266,9 @@
 
 	}
 );
-	 
 
-	
+
+
 
 	  //Modern Closet
 	  var mtlLoader = new THREE.MTLLoader();
@@ -330,7 +330,7 @@
 	}
 );
 
-     
+
 
 	    var mtlLoader = new THREE.MTLLoader();
 
@@ -480,23 +480,27 @@ function buildGui() {
   var Sofa = {
     Sofa:function() { SofaSpawner() }
   };
-    var Bed = {
-        Bed:function(){BedSpawner()}
-    };
-    var Beside_Table ={
-        Bedside_Table:function(){BedsideTableSpawner()}
-    };
-    var Dining_Table = {
-        Dining_Table:function(){DiningTableSpawner()}
-    };
-var Office_Desk = {
-    Office_Desk:function(){OfficeDeskSpawner()}
-};
-var Office_Chair = {
-    Office_Chair:function(){OfficeChairSpawner()}
-};
-    
-    
+  var Bed = {
+      Bed:function(){BedSpawner()}
+  };
+  var Beside_Table ={
+      Bedside_Table:function(){BedsideTableSpawner()}
+  };
+  var Dining_Table = {
+      Dining_Table:function(){DiningTableSpawner()}
+  };
+  var Office_Desk = {
+      Office_Desk:function(){OfficeDeskSpawner()}
+  };
+  var Office_Chair = {
+      Office_Chair:function(){OfficeChairSpawner()}
+  };
+
+  var Remove = {
+      REMOVE:function(){Remove_model()}
+  };
+
+
   var gOn = {
     gridOn:function(){ enableGrid() }
   };
@@ -526,11 +530,11 @@ var Office_Chair = {
     mod_drop.add(Cube,'Cube');
     mod_drop.add(Sofa,'Sofa');
     mod_drop.add(Bed, 'Bed');
-      mod_drop.add(Beside_Table, 'Bedside_Table');
+    mod_drop.add(Beside_Table, 'Bedside_Table');
     mod_drop.add(Dining_Table, 'Dining_Table');
     mod_drop.add(Office_Desk, 'Office_Desk');
-      mod_drop.add(Office_Chair,'Office_Chair');
-    
+    mod_drop.add(Office_Chair,'Office_Chair');
+
     //FROM MASTER
     /*mod_drop.add(params,'bed').name("Bed");
     mod_drop.add(params,'cupboard').name("Cupboard");
@@ -558,6 +562,7 @@ var Office_Chair = {
     func_drop.add(gOff,'gridOff');
     func_drop.add(bOn,'BorderCubeOn');
     func_drop.add(bOff,'BorderCubeOff');
+    func_drop.add(Remove,'REMOVE');
 
     gui.open();
   }
@@ -608,7 +613,7 @@ function CubeSpawner() {
 
       RaycasterObjects.push(cube_mesh);
     }
-     
+
 //SOFA
 var couch;
 function SofaSpawner(){
@@ -643,7 +648,7 @@ couch = cube_mesh_sofa;
 
 //BED
 var bed;
-function BedSpawner(){     
+function BedSpawner(){
 //transparent Cube For bed
 var geometry_cube_bed = new THREE.BoxGeometry(150,200,210);
 var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
@@ -651,7 +656,7 @@ var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
      scene.add(cube_mesh_bed);
      RaycasterObjects.push(cube_mesh_bed);
      bed = cube_mesh_bed;
-     
+
      //load a bed object and material
      var mtlLoader = new THREE.MTLLoader();
 
@@ -672,7 +677,7 @@ var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
         });
     });
 }
-     
+
      //DINING TABLE
      var diningtable;
      function DiningTableSpawner(){
@@ -683,7 +688,7 @@ var cube_mesh_dining_table = new THREE.Mesh(geometry_cube_dining_table,tranMater
      scene.add(cube_mesh_dining_table);
      RaycasterObjects.push(cube_mesh_dining_table);
      diningtable = cube_mesh_dining_table;
-         
+
          var mtlLoader = new THREE.MTLLoader();
 
     mtlLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.mtl", function(materials){
@@ -704,17 +709,17 @@ var cube_mesh_dining_table = new THREE.Mesh(geometry_cube_dining_table,tranMater
         });
     });
      }
-//OFFICE DESK     
+//OFFICE DESK
 var officedesk;
 function OfficeDeskSpawner(){
     var geometry_cube_office_desk = new THREE.BoxGeometry(335,200,150);
-    
+
 var cube_mesh_office_desk = new THREE.Mesh(geometry_cube_office_desk,tranMaterial);
      cube_mesh_office_desk.position.set(-100,0,-430);
      scene.add(cube_mesh_office_desk);
      RaycasterObjects.push(cube_mesh_office_desk);
      officedesk = cube_mesh_office_desk;
-    
+
     //office desk obj loader
      var loader = new THREE.OBJLoader();
 
@@ -726,13 +731,13 @@ var cube_mesh_office_desk = new THREE.Mesh(geometry_cube_office_desk,tranMateria
 		office_desk_mesh.scale.set(0.45, 0.45, 0.45);
 		 cube_mesh_office_desk.add(office_desk_mesh);
 	 });
-         
+
 }
-     
+
 var officechair;
      function OfficeChairSpawner(){
-     var geometry_cube_office_chair = new THREE.BoxGeometry(100,300,100);    
-    
+     var geometry_cube_office_chair = new THREE.BoxGeometry(100,300,100);
+
 var cube_mesh_office_chair = new THREE.Mesh(geometry_cube_office_chair,tranMaterial);
      cube_mesh_office_chair.position.set(-30,10,-360);
      scene.add(cube_mesh_office_chair);
@@ -757,18 +762,18 @@ var cube_mesh_office_chair = new THREE.Mesh(geometry_cube_office_chair,tranMater
         });
     });
      }
-     
+
      //BESIDE TABLE
 var bedsidetable;
      function BedsideTableSpawner(){
  var geometry_cube_bedside_table = new THREE.BoxGeometry(100,200,120);
-    
+
 var cube_mesh_bedside_table = new THREE.Mesh(geometry_cube_bedside_table,tranMaterial);
     cube_mesh_bedside_table.position.set(-450,0,80);
      scene.add(cube_mesh_bedside_table);
      RaycasterObjects.push(cube_mesh_bedside_table);
-     bedsidetable = cube_mesh_bedside_table;        
-         
+     bedsidetable = cube_mesh_bedside_table;
+
 //beside table
 	 var mtlLoader = new THREE.MTLLoader();
 
