@@ -268,24 +268,7 @@
 );
 	 
 
-	 //office chair
-	  var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/officechair/model.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/officechair/model.obj",function(mesh){
-        mesh.position.set(-30, 10, -360);
-        mesh.rotation.y = Math.PI / 1
-		mesh.rotation.x = Math.PI / 2;
-        mesh.scale.set(1, 1, 1);
-        scene.add(mesh);
-
-        });
-    });
+	
 
 	  //Modern Closet
 	  var mtlLoader = new THREE.MTLLoader();
@@ -500,15 +483,20 @@ function buildGui() {
     var Bed = {
         Bed:function(){BedSpawner()}
     };
+    var Beside_Table ={
+        Bedside_Table:function(){BedsideTableSpawner()}
+    };
     var Dining_Table = {
         Dining_Table:function(){DiningTableSpawner()}
     };
 var Office_Desk = {
     Office_Desk:function(){OfficeDeskSpawner()}
 };
-    var Beside_Table ={
-        Bedside_Table:function(){BedsideTableSpawner()}
-    };
+var Office_Chair = {
+    Office_Chair:function(){OfficeChairSpawner()}
+};
+    
+    
   var gOn = {
     gridOn:function(){ enableGrid() }
   };
@@ -538,9 +526,11 @@ var Office_Desk = {
     mod_drop.add(Cube,'Cube');
     mod_drop.add(Sofa,'Sofa');
     mod_drop.add(Bed, 'Bed');
+      mod_drop.add(Beside_Table, 'Bedside_Table');
     mod_drop.add(Dining_Table, 'Dining_Table');
     mod_drop.add(Office_Desk, 'Office_Desk');
-    mod_drop.add(Beside_Table, 'Bedside_Table');
+      mod_drop.add(Office_Chair,'Office_Chair');
+    
     //FROM MASTER
     /*mod_drop.add(params,'bed').name("Bed");
     mod_drop.add(params,'cupboard').name("Cupboard");
@@ -739,6 +729,35 @@ var cube_mesh_office_desk = new THREE.Mesh(geometry_cube_office_desk,tranMateria
 	 });
          
 }
+     
+var officechair;
+     function OfficeChairSpawner(){
+     var geometry_cube_office_chair = new THREE.BoxGeometry(100,300,100);    
+    
+var cube_mesh_office_chair = new THREE.Mesh(geometry_cube_office_chair,tranMaterial);
+     cube_mesh_office_chair.position.set(-30,10,-360);
+     scene.add(cube_mesh_office_chair);
+     RaycasterObjects.push(cube_mesh_office_chair);
+     officechair = cube_mesh_office_chair;
+         //office chair
+	  var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/officechair/model.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/officechair/model.obj",function(mesh){
+       //mesh.position.set(-30, 10, -360);
+        mesh.rotation.y = Math.PI / 1
+		mesh.rotation.x = Math.PI / 2;
+        mesh.scale.set(1, 1, 1);
+        cube_mesh_office_chair.add(mesh);
+
+        });
+    });
+     }
      
      //BESIDE TABLE
 var bedsidetable;
