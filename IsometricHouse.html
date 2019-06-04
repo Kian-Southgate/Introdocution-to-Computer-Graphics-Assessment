@@ -708,7 +708,7 @@ couch = cube_mesh_sofa;
         materials.preload();
         var objLoader = new THREE.OBJLoader();
         objLoader.setMaterials(materials);
-        loader.load("models/sofa/sofa.obj",function(sofa_mesh){
+        objLoader.load("models/sofa/sofa.obj",function(sofa_mesh){
 
         sofa_mesh.position.set(0, -50, 0);
         sofa_mesh.rotation.y = 4.7;
