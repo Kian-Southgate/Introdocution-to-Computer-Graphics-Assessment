@@ -266,23 +266,7 @@
 
 	}
 );
-	 //beside table
-	 var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/bedsidetable/bedsidemtl.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/bedsidetable/bedsideobj.obj",function(mesh){
-        mesh.position.set(-450, 0, 80);
-        mesh.rotation.y = 0;
-        mesh.scale.set(25, 25, 25);
-        scene.add(mesh);
-
-        });
-    });
+	 
 
 	 //office chair
 	  var mtlLoader = new THREE.MTLLoader();
@@ -522,6 +506,9 @@ function buildGui() {
 var Office_Desk = {
     Office_Desk:function(){OfficeDeskSpawner()}
 };
+    var Beside_Table ={
+        Bedside_Table:function(){BedsideTableSpawner()}
+    };
   var gOn = {
     gridOn:function(){ enableGrid() }
   };
@@ -552,7 +539,8 @@ var Office_Desk = {
     mod_drop.add(Sofa,'Sofa');
     mod_drop.add(Bed, 'Bed');
     mod_drop.add(Dining_Table, 'Dining_Table');
-    mod_drop.add(Office_Desk, 'Office_Desk')
+    mod_drop.add(Office_Desk, 'Office_Desk');
+    mod_drop.add(Beside_Table, 'Bedside_Table');
     //FROM MASTER
     /*mod_drop.add(params,'bed').name("Bed");
     mod_drop.add(params,'cupboard').name("Cupboard");
@@ -742,15 +730,45 @@ var cube_mesh_office_desk = new THREE.Mesh(geometry_cube_office_desk,tranMateria
      var loader = new THREE.OBJLoader();
 
 
-	 loader.load('models/officedesk/desk.obj', function (object){
+	 loader.load('models/officedesk/desk.obj', function (office_desk_mesh){
 
-		 object.position.set(0, 0,0);
+		 //office_desk_mesh.position.set(0, 0,0);
 		 //object.rotation.y = 0;
-		object.scale.set(0.45, 0.45, 0.45);
-		 cube_mesh_office_desk.add(object);
+		office_desk_mesh.scale.set(0.45, 0.45, 0.45);
+		 cube_mesh_office_desk.add(office_desk_mesh);
 	 });
          
 }
+     
+     //BESIDE TABLE
+var bedsidetable;
+     function BedsideTableSpawner(){
+ var geometry_cube_bedside_table = new THREE.BoxGeometry(100,200,120);
+    
+var cube_mesh_bedside_table = new THREE.Mesh(geometry_cube_bedside_table,tranMaterial);
+    cube_mesh_bedside_table.position.set(-450,0,80);
+     scene.add(cube_mesh_bedside_table);
+     RaycasterObjects.push(cube_mesh_bedside_table);
+     bedsidetable = cube_mesh_bedside_table;        
+         
+//beside table
+	 var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/bedsidetable/bedsidemtl.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/bedsidetable/bedsideobj.obj",function(bedside_table_mesh){
+        //bedside_table_mesh.position.set(-450, 0, 80);
+        bedside_table_mesh.rotation.y = 0;
+        bedside_table_mesh.scale.set(25, 25, 25);
+       cube_mesh_bedside_table.add(bedside_table_mesh);
+
+        });
+    });
+     }
 
 //Grid
 var Gridsize = 1000;
