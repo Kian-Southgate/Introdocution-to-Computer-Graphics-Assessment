@@ -152,8 +152,9 @@
     //floor
     var floorGeometry = new THREE.BoxGeometry (1000, 20, 1000);
     var floorMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/timber4.jpg")});
-    floor = new THREE.Mesh (floorGeometry, floorMaterial);
+    var floor = new THREE.Mesh (floorGeometry, floorMaterial);
     floor.position.set(0, 0, 0);
+    
     //Hallway
     var eHallGeometry = new THREE.BoxGeometry (25, 200, 400);
     var eHallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/render.jpg")}); //East Wall Hallway
@@ -543,6 +544,18 @@ var Lamp = {
   var Bw = {
     BlackWhite:function(){ BWTexture() }
   };
+    
+var Carpet = {
+    Carpet:function(){CarpetTexture()}
+};
+    
+var Bright_Wood = {
+    Bright_Wood:function(){WoodTexture()}
+};
+    
+var Tiles = {
+    Tiles:function(){TilesTexture()}
+};
 
   window.onload = function(){
     var gui = new dat.GUI({height: 2 * 32 - 1});
@@ -556,6 +569,7 @@ var Lamp = {
     mod_drop.add(Office_Desk, 'Office_Desk');
     mod_drop.add(Office_Chair,'Office_Chair');
     mod_drop.add(Lamp, 'Lamp');
+      
 
     //FROM MASTER
     /*mod_drop.add(params,'bed').name("Bed");
@@ -564,8 +578,11 @@ var Lamp = {
     mod_drop.add(params,'bench').name("Kitchen bench");
     mod_drop.add(params,'sink').name("Kitchen sink");*/
 
-    var tex_drop = gui.addFolder("Textures");
-    tex_drop.add(Camo,'Camo');
+    var tex_drop = gui.addFolder("Floor Textures");
+    tex_drop.add(Carpet, 'Carpet');
+    tex_drop.add(Bright_Wood, 'Bright_Wood');
+    tex_drop.add(Tiles, 'Tiles');
+    /*tex_drop.add(Camo,'Camo');
     tex_drop.add(Bw,'BlackWhite');
     //FROM MASTER
     tex_drop.add(params, 'grass').name("Grass"); //land
@@ -576,7 +593,7 @@ var Lamp = {
     tex_drop.add(params, 'render').name("Cement Render"); //houseWall
 
     tex_drop.add(params, 'tiles').name("Tiles"); //houseFloor
-    tex_drop.add(params, 'timberFloor').name("Timber Flooring"); //houseFloor
+    tex_drop.add(params, 'timberFloor').name("Timber Flooring"); //houseFloor*/
 
     var func_drop = gui.addFolder("Functions");
 
@@ -588,7 +605,37 @@ var Lamp = {
 
     gui.open();
   }
+  
+  
 }
+     
+  function CarpetTexture() {     
+// instantiate a loader
+var texture = new THREE.TextureLoader().load( 'img/carpet.jpg' );
+// immediately use the texture for material creation
+var material = new THREE.MeshBasicMaterial( { map: texture } );
+          floor.material = material;
+      }
+     
+     function WoodTexture() {     
+// instantiate a loader
+var texture = new THREE.TextureLoader().load( 'img/timberfloor3.jpg' );
+// immediately use the texture for material creation
+var material = new THREE.MeshBasicMaterial( { map: texture } );
+          floor.material = material;
+      }
+     
+          function TilesTexture() {     
+// instantiate a loader
+var texture = new THREE.TextureLoader().load( 'img/tiles5.jpg' );
+// immediately use the texture for material creation
+var material = new THREE.MeshBasicMaterial( { map: texture } );
+          floor.material = material;
+      }
+     
+      
+     
+    
 
 //MAX SHIT PLZ NO TOUCHY
 //Cube TEXTURES
