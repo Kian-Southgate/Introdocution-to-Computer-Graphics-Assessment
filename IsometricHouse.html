@@ -680,11 +680,9 @@ couch = cube_mesh_sofa;
 var bed;
 function BedSpawner(){     
 //transparent Cube For bed
-var geometry_cube_bed = new THREE.BoxGeometry(150,100,200);
+var geometry_cube_bed = new THREE.BoxGeometry(150,200,210);
 var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
-     cube_mesh_bed.position.x= -335;
-     cube_mesh_bed.position.y= 50;
-     cube_mesh_bed.position.z = 120;
+     cube_mesh_bed.position.set(-335,50,120);
      scene.add(cube_mesh_bed);
      RaycasterObjects.push(cube_mesh_bed);
      bed = cube_mesh_bed;
@@ -699,13 +697,13 @@ var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
         objLoader.setMaterials(materials);
 
         objLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj",function(bed_mesh){
-        bed_mesh.position.set(-335, 50, 120);
+        bed_mesh.position.set(0, 50, 0);
         bed_mesh.rotation.y = Math.PI;
         bed_mesh.rotation.z = Math.PI;
         bed_mesh.rotation.x = Math.PI / 2;
         bed_mesh.scale.set(1, 1, 1);
            //need to change position and make bed flat with floor
-        scene.add(bed_mesh);
+        cube_mesh_bed.add(bed_mesh);
 
         });
     });
