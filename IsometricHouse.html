@@ -4,20 +4,18 @@
   </head>
   <body>
     <!--The three.js library-->
-    <script src="../Documents/GitHub/Introdocution-to-Computer-Graphics-Assessment/js/three.js"> </script>
+    <script src="js/three.js"> </script>
     <!--Trackball library-->
-    <script src="../Documents/GitHub/Introdocution-to-Computer-Graphics-Assessment/js/OrbitControls.js"> </script>
+    <script src="js/OrbitControls.js"> </script>
     <!--GUI library-->
-    <script src="../Documents/GitHub/Introdocution-to-Computer-Graphics-Assessment/js/dat.gui.min.js"> </script>
+    <script src="js/dat.gui.min.js"> </script>
     <!--The object loader-->
-    <script src="../Documents/GitHub/Introdocution-to-Computer-Graphics-Assessment/js/OBJLoader.js"></script>
+    <script src="js/OBJLoader.js"></script>
     <!--The material loader-->
-    <script src="../Documents/GitHub/Introdocution-to-Computer-Graphics-Assessment/js/MTLLoader.js"></script>
-
-	
+    <script src="js/MTLLoader.js"></script>
 
 
-<video id="video" style="display: none; position: absolute: left: 15px; top: 75px;" src="../Documents/GitHub/Introdocution-to-Computer-Graphics-Assessment/videos/TV.mp4" controls="true" autoplay="true"></video>
+<video id="video" style="display: none; position: absolute: left: 15px; top: 75px;" src="videos/TV.mp4" controls="true" autoplay="true"></video>
 
     <style>
       body {
@@ -33,9 +31,9 @@
 <!--INCLUDE PROGRAM CODE HERE-->
 
 	//Test Script
-	
-	
-	
+
+
+
     //SCENE
     var scene = new THREE.Scene();
     var ratio = window.innerWidth/window.innerHeight;
@@ -160,8 +158,7 @@
 
      //load a couch object and material
 
-  
-	 var mtlLoader = new THREE.MTLLoader();
+    /*var mtlLoader = new THREE.MTLLoader();
 
     mtlLoader.load("models/sofa/sofa.mtl", function(materials){
 
@@ -176,7 +173,8 @@
         scene.add(mesh);
 
         });
-    });
+    });*/
+
 
      //load a bed object and material
      var mtlLoader = new THREE.MTLLoader();
@@ -198,36 +196,61 @@
 
         });
     });
-	 
-	 //Television and TV Unit
-     var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/Samsungtv/Samsung Smart TV 55 Zoll.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/Samsungtv/Samsung Smart TV 55 Zoll.obj",function(mesh){
-        mesh.position.set(50, 70, 250);
-        mesh.rotation.y = Math.PI / 2;
-        mesh.rotation.z = 0;
-        mesh.rotation.x = 0;
-        mesh.scale.set(20, 20, 20);
-           //need to change position and make bed flat with floor
-        scene.add(mesh);
-
-        });
-    });
-	
+ var loader = new THREE.OBJLoader();
+ var video = document.getElementById('video');
 
 
-	/* //office desk
+	 loader.load('models/television/monitor.obj', function ( object){
+
+		 object.position.set(470, 50, 650);
+		 object.rotation.y = Math.PI / 2;
+		 object.rotation.x = 0;
+		 object.scale.set(3, 3, 3);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+
+
+	 var loader = new THREE.OBJLoader();
+
+
+	 loader.load('models/tvunit/table.obj', function (object){
+
+		 object.position.set(50, 30, 260);
+		 object.rotation.y = 0;
+		 object.scale.set(0.5, 0.5, 0.5);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+
+	 //office desk
 	  var loader = new THREE.OBJLoader();
 
 
 	 loader.load('models/officedesk/desk.obj', function (object){
-		 
+
 		 object.position.set(-100, 0, -430);
 		 object.rotation.y = 0;
 		 object.scale.set(0.45, 0.45, 0.45);
@@ -244,49 +267,30 @@
 		console.log( 'An error happened' );
 
 	}
-);*/
-	
-	 /*//office desk
-	 var mtlLoader = new THREE.MTLLoader();
-	 mtlLoader.setTexturePath('models/kitchen/');
- 	 mtlLoader.load("models/officedesk/Table/Desk.mtl", function(materials){
+);
 
-        materials.preload();
-		
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-        objLoader.load("models/officedesk/Table/Desk.obj",function(mesh){
-        mesh.position.set(-100, 100, -430);
-        mesh.rotation.y = 0;
-		mesh.rotation.x = 0;
-        mesh.scale.set(0.3, 0.3, 0.3);
-        scene.add(mesh);
+	  var loader = new THREE.OBJLoader();
 
-        });
-    });
-*/	 
 
-	 
-//kitchen
-	 var mtlLoader = new THREE.MTLLoader();
-	 mtlLoader.setTexturePath('models/kitchen/');
- 	 mtlLoader.load("models/kitchen/Kitchen.mtl", function(materials){
 
-        materials.preload();
-		
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-        objLoader.load("models/kitchen/Kitchen.obj",function(mesh){
-        mesh.position.set(320, 0, -270);
-        mesh.rotation.y = Math.PI / 2;
-		mesh.rotation.x = 0;
-        mesh.scale.set(60, 60, 60);
-        scene.add(mesh);
+	 loader.load('models/kitchen/Kitchen.obj', function ( object){
+		 object.position.set(330, 0, -275);
+		 object.rotation.y = Math.PI / 2;
+		 object.scale.set(60, 60, 60);
+		 scene.add (object);
+	 },
+				 	function ( xhr ) {
 
-        });
-    });
-	 
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
 
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
 	 //beside table
 	 var mtlLoader = new THREE.MTLLoader();
 
@@ -304,123 +308,7 @@
 
         });
     });
-	
-	 //Plant
-	 var mtlLoader = new THREE.MTLLoader();
 
-    mtlLoader.load("models/plant/01Alocasia_obj.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/plant/01Alocasia_obj.obj",function(mesh){
-        mesh.position.set(120, 0, -440);
-        mesh.rotation.y = 0;
-        mesh.scale.set(0.1, 0.1, 0.1);
-        scene.add(mesh);
-
-        });
-    });
-	
-	 //car
-	 var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/car/Avent.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/car/Avent.obj",function(mesh){
-        mesh.position.set(700, 0, 0);
-        mesh.rotation.y = Math.PI / 2;
-		mesh.rotation.x = 0;
-		mesh.rotation.z = 0;
-        mesh.scale.set(100, 100, 100);
-        scene.add(mesh);
-
-        });
-    });
-	 
-	 //tree
-	 var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/tree/Tree.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/tree/Tree.obj",function(mesh){
-        mesh.position.set(900, 0, 0);
-        mesh.rotation.y = Math.PI / 2;
-		mesh.rotation.x = 0;
-		mesh.rotation.z = 0;
-        mesh.scale.set(100, 100, 100);
-        scene.add(mesh);
-
-        });
-    });
-	 //tree 2
-	 var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/tree2/Tree.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/tree2/Tree.obj",function(mesh){
-        mesh.position.set(-800, 0, 0);
-        mesh.rotation.y = Math.PI / 2;
-		mesh.rotation.x = 0;
-		mesh.rotation.z = 0;
-        mesh.scale.set(70, 70, 70);
-        scene.add(mesh);
-
-        });
-    });
-	 //car 2
-	 var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/car2/Touareg.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/car2/Touareg.obj",function(mesh){
-        mesh.position.set(-700, 0, 400);
-        mesh.rotation.y = Math.PI / 2;
-		mesh.rotation.x = 0;
-		mesh.rotation.z = 0;
-        mesh.scale.set(0.1, 0.1, 0.1);
-        scene.add(mesh);
-
-        });
-    });
-	
-	  //dog
-	 var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/dog/12228_Dog_v1_L2.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/dog/12228_Dog_v1_L2.obj",function(mesh){
-        mesh.position.set(-700, 0, 900);
-        mesh.rotation.y = 0;
-		mesh.rotation.x = 0;
-		mesh.rotation.z = 0;
-        mesh.scale.set(2, 2, 1);
-        scene.add(mesh);
-
-        });
-    });
-	 
 	 //office chair
 	  var mtlLoader = new THREE.MTLLoader();
 
@@ -439,9 +327,7 @@
 
         });
     });
-	
-	 
-	
+
 	  //Modern Closet
 	  var mtlLoader = new THREE.MTLLoader();
 
@@ -452,38 +338,33 @@
         objLoader.setMaterials(materials);
 
         objLoader.load("models/minicupboard/modern_closet.obj",function(mesh){
-        mesh.position.set(0, 0, 0);
+        mesh.position.set(0, 200, 0);
         mesh.rotation.y = 0;
 		mesh.rotation.x = 0;
-        mesh.scale.set(10, 10, 10);
+        mesh.scale.set(100, 100, 100);
         scene.add(mesh);
 
         });
     });
-	 
-	 
-	  //Pool Table
-	  var mtlLoader = new THREE.MTLLoader();
 
-    mtlLoader.load("models/pooltable/10523_Pool_Table_v1_L3.mtl", function(materials){
+	 var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/sofa2/sofa.mtl", function(materials){
 
         materials.preload();
         var objLoader = new THREE.OBJLoader();
         objLoader.setMaterials(materials);
 
-        objLoader.load("models/pooltable/10523_Pool_Table_v1_L3.obj",function(mesh){
-        mesh.position.set(-30, 10, -200);
-        mesh.rotation.y = Math.PI / 1;
-		mesh.rotation.x = Math.PI / 2;
-		mesh.rotation.z = Math.PI / 2;
-        mesh.scale.set(0.9, 0.9, 0.9);
+        objLoader.load("models/sofa2/sofa.obj",function(mesh){
+        mesh.position.set(250, 0, 250);
+        mesh.rotation.y = 600;
+        mesh.scale.set(9, 9, 9);
         scene.add(mesh);
 
         });
     });
-	
-	
-/* Need to Find New one
+
+
 	   var loader = new THREE.OBJLoader();
 
 
@@ -506,8 +387,6 @@
 
 	}
 );
-*/
-
 
      //load a dining table object with same white material used for the bed
      var mtlLoader = new THREE.MTLLoader();
@@ -566,8 +445,6 @@
 
         });
     });
-	 
-	
 
 
 
@@ -685,6 +562,14 @@ function buildGui() {
   var gOff = {
     gridOff:function(){ disableGrid() }
   };
+
+  var bOn = {
+    BorderCubeOn:function(){ borderCubeOn() }
+  };
+  var bOff = {
+    BorderCubeOff:function(){ borderCubeOff() }
+  };
+
   var Camo = {
     Camo:function(){ CamoTexture() }
   };
@@ -724,6 +609,8 @@ function buildGui() {
 
     func_drop.add(gOn,'gridOn');
     func_drop.add(gOff,'gridOff');
+    func_drop.add(bOn,'BorderCubeOn');
+    func_drop.add(bOff,'BorderCubeOff');
 
     gui.open();
   }
@@ -733,6 +620,15 @@ function buildGui() {
 //Cube TEXTURES
 function Spinner() {
   selectedObject.rotation.z += Math.PI / 2;
+}
+
+function borderCubeOn() {
+
+  tranMaterial.opacity = .25;
+}
+function borderCubeOff() {
+
+  tranMaterial.opacity = 0;
 }
 function CamoTexture() {
   selectedObject.traverse(function(child) {
@@ -754,33 +650,45 @@ selectedObject.traverse(function(child) {
 //Spawner
 function CubeSpawner() {
       var geometry_cube = new THREE.BoxGeometry(100,100,100);
-      var cube_mesh = new THREE.Mesh(geometry_cube,material_bw);
+      var cube_mesh = new THREE.Mesh(geometry_cube,tranMaterial);
       cube_mesh.position.x= 50;
       cube_mesh.position.z= 0;
       cube_mesh.position.y = 60;
+      tranMaterial.opacity = .5;
       scene.add(cube_mesh);
+
+
+
       RaycasterObjects.push(cube_mesh);
     }
-
+var couch;
 function SofaSpawner(){
          //load a couch object and material
 
-    var mtlLoader = new THREE.MTLLoader();
+//transparent Cube For Sofa
+var geometry_cube_sofa = new THREE.BoxGeometry(100,100,300);
+var cube_mesh_sofa = new THREE.Mesh(geometry_cube_sofa,tranMaterial);
+cube_mesh_sofa.position.x= 300;
+cube_mesh_sofa.position.z= 0;
+cube_mesh_sofa.position.y = 60;
+scene.add(cube_mesh_sofa);
+RaycasterObjects.push(cube_mesh_sofa);
+couch = cube_mesh_sofa;
 
-    mtlLoader.load("models/sofa/sofa.mtl", function(materials){
+//    var mtlLoader = new THREE.MTLLoader();
+  //  mtlLoader.load('models/sofa/sofa.mtl', function(materials){
 
-        materials.preload();
+    //    materials.preload();
         var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
+      //  objLoader.setMaterials(materials);
+        loader.load("models/sofa/sofa.obj",function(sofa_mesh){
 
-        objLoader.load("models/sofa/sofa.obj",function(mesh){
-        mesh.position.set(300, 0, 210);
-        mesh.rotation.y = 4.7;
-        mesh.scale.set(1, 1, 1);
-        scene.add(mesh);
-        RaycasterObjects.push(mesh);
+        sofa_mesh.position.set(0, -50, 0);
+        sofa_mesh.rotation.y = 4.7;
+        sofa_mesh.scale.set(.75, .75, .75);
+        cube_mesh_sofa.add(sofa_mesh);
         });
-    });
+  //  });
 
 }
 
@@ -866,6 +774,10 @@ var Gridsize = 1000;
 
       else if (selectedObject == null && intersects[0].object != floor && intersects[0].object != gridHelper ){
         selectedObject = intersects[0].object;
+        if (intersects[0].object == couch){
+          console.log("FUck yeah");
+        }
+
                 MaterialStore = selectedObject.material;
                 selectedObject.material = material_flower;
     }
@@ -901,7 +813,7 @@ var Gridsize = 1000;
       var bw_texture = new THREE.TextureLoader().load('texture/bw.jpg');
       var flower_texture = new THREE.TextureLoader().load('texture/flowers.jpg');
 
-	  
+
       var material_camo = new THREE.MeshPhongMaterial();
           material_camo.color=  new THREE.Color(1,1,1);
           material_camo.map = camo_texture;
@@ -911,6 +823,9 @@ var Gridsize = 1000;
           material_bw.color=  new THREE.Color(1,1,1);
           material_bw.map = bw_texture;
           material_bw.wireframe=false;
+
+      var tranMaterial = new THREE.MeshLambertMaterial( { transparent: true } );
+      tranMaterial.opacity = .25;
 
       var material_flower = new THREE.MeshLambertMaterial();
           material_flower.color=  new THREE.Color(1,1,1);
