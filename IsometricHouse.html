@@ -20,7 +20,7 @@
 <video id="video" style="display: none; position: absolute: left: 15px; top: 75px;" src="videos/TV.mp4" controls="true" autoplay="true"></video>
 
     <style>
-      body {
+      body {w
         font-family: ;
 
       }
@@ -179,56 +179,6 @@
 
 
 
- var loader = new THREE.OBJLoader();
- var video = document.getElementById('video');
-
-
-	 loader.load('models/television/monitor.obj', function ( object){
-
-		 object.position.set(470, 50, 650);
-		 object.rotation.y = Math.PI / 2;
-		 object.rotation.x = 0;
-		 object.scale.set(3, 3, 3);
-		 scene.add (object);
-	 },
-				 	function ( xhr ) {
-
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-	},
-	// called when loading has errors
-	function ( error ) {
-
-		console.log( 'An error happened' );
-
-	}
-);
-
-
-	 var loader = new THREE.OBJLoader();
-
-
-	 //table for tv
-     loader.load('models/tvunit/table.obj', function (object){
-
-		 object.position.set(50, 30, 260);
-		 object.rotation.y = 0;
-		 object.scale.set(0.5, 0.5, 0.5);
-		 scene.add (object);
-	 },
-				 	function ( xhr ) {
-
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-	},
-	// called when loading has errors
-	function ( error ) {
-
-		console.log( 'An error happened' );
-
-	}
-);
-
 	 //office desk fbx loader fail
 	 /*var fbxloader = new THREE.FBXLoader();
      fbxloader.load( 'models/officedesk/Desk.fbx', function ( object ){
@@ -241,31 +191,6 @@
 
     });*/
 
-
-
-
-	  var loader = new THREE.OBJLoader();
-
-
-
-	 loader.load('models/kitchen/Kitchen.obj', function ( object){
-		 object.position.set(330, 0, -275);
-		 object.rotation.y = Math.PI / 2;
-		 object.scale.set(60, 60, 60);
-		 scene.add (object);
-	 },
-				 	function ( xhr ) {
-
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-	},
-	// called when loading has errors
-	function ( error ) {
-
-		console.log( 'An error happened' );
-
-	}
-);
 
 
 
@@ -307,28 +232,6 @@
     });
 
 
-	   var loader = new THREE.OBJLoader();
-
-
-
-	 loader.load('models/wardrobe/wardrobe.obj', function ( object){
-		 object.position.set(-380, 0, 450);
-		 object.rotation.y = Math.PI / 1;
-		 object.scale.set(43, 43, 43);
-		 scene.add (object);
-	 },
-				 	function ( xhr ) {
-
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-	},
-	// called when loading has errors
-	function ( error ) {
-
-		console.log( 'An error happened' );
-
-	}
-);
 
 
 
