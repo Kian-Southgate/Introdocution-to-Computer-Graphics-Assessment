@@ -570,6 +570,10 @@ var Tiles = {
     mod_drop.add(Office_Chair,'Office_Chair');
     mod_drop.add(Lamp, 'Lamp');
       
+    var light_drop = gui.addFolder("Lighting");
+      
+    light_drop.add(light.intensity,0,10).name('Intensity').listen();
+      
 
     //FROM MASTER
     /*mod_drop.add(params,'bed').name("Bed");
@@ -609,29 +613,29 @@ var Tiles = {
   
 }
      
-  function CarpetTexture() {     
+function CarpetTexture() {     
 // instantiate a loader
 var texture = new THREE.TextureLoader().load( 'img/carpet.jpg' );
 // immediately use the texture for material creation
 var material = new THREE.MeshBasicMaterial( { map: texture } );
           floor.material = material;
-      }
+}
      
-     function WoodTexture() {     
+function WoodTexture() {     
 // instantiate a loader
 var texture = new THREE.TextureLoader().load( 'img/timberfloor3.jpg' );
 // immediately use the texture for material creation
 var material = new THREE.MeshBasicMaterial( { map: texture } );
           floor.material = material;
-      }
+}
      
-          function TilesTexture() {     
+function TilesTexture() {     
 // instantiate a loader
 var texture = new THREE.TextureLoader().load( 'img/tiles5.jpg' );
 // immediately use the texture for material creation
 var material = new THREE.MeshBasicMaterial( { map: texture } );
           floor.material = material;
-      }
+}
      
       
      
@@ -832,7 +836,7 @@ var cube_mesh_office_chair = new THREE.Mesh(geometry_cube_office_chair,tranMater
     });
      }
 
-     //BESIDE TABLE
+     //BEDSIDE TABLE
 var bedsidetable;
      function BedsideTableSpawner(){
  var geometry_cube_bedside_table = new THREE.BoxGeometry(100,200,100);
@@ -843,7 +847,7 @@ var cube_mesh_bedside_table = new THREE.Mesh(geometry_cube_bedside_table,tranMat
      RaycasterObjects.push(cube_mesh_bedside_table);
      bedsidetable = cube_mesh_bedside_table;
 
-//beside table
+//bedside table
 	 var mtlLoader = new THREE.MTLLoader();
 
     mtlLoader.load("models/bedsidetable/bedsidemtl.mtl", function(materials){
@@ -862,18 +866,18 @@ var cube_mesh_bedside_table = new THREE.Mesh(geometry_cube_bedside_table,tranMat
     });
      }
          
-    //LAMP
-    var lamp;
-         function LampSpawner(){
-             var geometry_cube_lamp = new THREE.BoxGeometry(100,360,100);
+//LAMP
+var lamp;
+ function LampSpawner(){
+     var geometry_cube_lamp = new THREE.BoxGeometry(100,360,100);
 
-var cube_mesh_lamp = new THREE.Mesh(geometry_cube_lamp,tranMaterial);
-    cube_mesh_lamp.position.set(0,5,0);
-     scene.add(cube_mesh_lamp);
-     RaycasterObjects.push(cube_mesh_lamp);
-     lamp = cube_mesh_lamp;
+     var cube_mesh_lamp = new THREE.Mesh(geometry_cube_lamp,tranMaterial);
+        cube_mesh_lamp.position.set(0,5,0);
+        scene.add(cube_mesh_lamp);
+        RaycasterObjects.push(cube_mesh_lamp);
+        lamp = cube_mesh_lamp;
 //lamp
-	 var mtlLoader = new THREE.MTLLoader();
+     var mtlLoader = new THREE.MTLLoader();
 
     mtlLoader.load("models/lamp/FloorLamp.mtl", function(materials){
 
@@ -881,23 +885,22 @@ var cube_mesh_lamp = new THREE.Mesh(geometry_cube_lamp,tranMaterial);
         var objLoader = new THREE.OBJLoader();
         objLoader.setMaterials(materials);
 
-        objLoader.load("models/lamp/FloorLamp.obj",function(lamp_mesh){
-       lamp_mesh.position.set(0, 5, 0);
+    objLoader.load("models/lamp/FloorLamp.obj",function(lamp_mesh){
+        lamp_mesh.position.set(0, 5, 0);
         //bedside_table_mesh.rotation.y = 0;
         lamp_mesh.scale.set(15, 15, 15);
-       cube_mesh_lamp.add(lamp_mesh);
+        cube_mesh_lamp.add(lamp_mesh);
             
-            var lamplight = new THREE.SpotLight(0xffffff);
-            lamplight.position.y = 200;
-            cube_mesh_lamp.add(lamplight);
+        var lamplight = new THREE.SpotLight(0xffffff);
+        lamplight.position.y = 200;
+        cube_mesh_lamp.add(lamplight);
             
-            var lamplighthelper = new THREE.SpotLightHelper(lamplight);
-            scene.add(lamplighthelper);
+        var lamplighthelper = new THREE.SpotLightHelper(lamplight);
+        scene.add(lamplighthelper);
 
         });
-    });
-             
-         }
+    });             
+}
      
 
 //Grid
