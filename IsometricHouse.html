@@ -176,26 +176,7 @@
     });*/
 
 
-     //load a bed object and material
-     var mtlLoader = new THREE.MTLLoader();
-
-    mtlLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.mtl", function(materials){
-
-        materials.preload();
-        var objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-
-        objLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj",function(mesh){
-        mesh.position.set(-335, 50, 120);
-        mesh.rotation.y = Math.PI;
-        mesh.rotation.z = Math.PI;
-        mesh.rotation.x = Math.PI / 2;
-        mesh.scale.set(1, 1, 1);
-           //need to change position and make bed flat with floor
-        scene.add(mesh);
-
-        });
-    });
+     
  var loader = new THREE.OBJLoader();
  var video = document.getElementById('video');
 
@@ -556,6 +537,9 @@ function buildGui() {
   var Sofa = {
     Sofa:function() { SofaSpawner() }
   };
+    var Bed = {
+        Bed:function(){BedSpawner()}
+    };
   var gOn = {
     gridOn:function(){ enableGrid() }
   };
@@ -584,6 +568,7 @@ function buildGui() {
     var mod_drop = gui.addFolder("Models");
     mod_drop.add(Cube,'Cube');
     mod_drop.add(Sofa,'Sofa');
+    mod_drop.add(Bed, 'Bed');
     //FROM MASTER
     mod_drop.add(params,'bed').name("Bed");
     mod_drop.add(params,'cupboard').name("Cupboard");
@@ -690,6 +675,40 @@ couch = cube_mesh_sofa;
         });
   //  });
 
+}
+     
+var bed;
+function BedSpawner(){     
+//transparent Cube For bed
+var geometry_cube_bed = new THREE.BoxGeometry(150,100,200);
+var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
+     cube_mesh_bed.position.x= -335;
+     cube_mesh_bed.position.y= 50;
+     cube_mesh_bed.position.z = 120;
+     scene.add(cube_mesh_bed);
+     RaycasterObjects.push(cube_mesh_bed);
+     bed = cube_mesh_bed;
+     
+     //load a bed object and material
+     var mtlLoader = new THREE.MTLLoader();
+
+    mtlLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj",function(bed_mesh){
+        bed_mesh.position.set(-335, 50, 120);
+        bed_mesh.rotation.y = Math.PI;
+        bed_mesh.rotation.z = Math.PI;
+        bed_mesh.rotation.x = Math.PI / 2;
+        bed_mesh.scale.set(1, 1, 1);
+           //need to change position and make bed flat with floor
+        scene.add(bed_mesh);
+
+        });
+    });
 }
 
 //Grid
