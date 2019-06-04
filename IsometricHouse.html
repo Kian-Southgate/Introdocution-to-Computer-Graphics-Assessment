@@ -641,7 +641,7 @@ couch = cube_mesh_sofa;
 
 }
 
-     //BED
+//BED
 var bed;
 function BedSpawner(){     
 //transparent Cube For bed
@@ -667,7 +667,6 @@ var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
         bed_mesh.rotation.z = Math.PI;
         bed_mesh.rotation.x = Math.PI / 2;
         bed_mesh.scale.set(1, 1, 1);
-           //need to change position and make bed flat with floor
         cube_mesh_bed.add(bed_mesh);
 
         });
