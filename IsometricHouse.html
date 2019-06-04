@@ -480,25 +480,25 @@ function buildGui() {
   var Sofa = {
     Sofa:function() { SofaSpawner() }
   };
-    var Bed = {
-        Bed:function(){BedSpawner()}
-    };
-    var Beside_Table ={
-        Bedside_Table:function(){BedsideTableSpawner()}
-    };
-    var Dining_Table = {
-        Dining_Table:function(){DiningTableSpawner()}
-    };
-var Office_Desk = {
-    Office_Desk:function(){OfficeDeskSpawner()}
-};
-var Office_Chair = {
-    Office_Chair:function(){OfficeChairSpawner()}
-};
+  var Bed = {
+      Bed:function(){BedSpawner()}
+  };
+  var Beside_Table ={
+      Bedside_Table:function(){BedsideTableSpawner()}
+  };
+  var Dining_Table = {
+      Dining_Table:function(){DiningTableSpawner()}
+  };
+  var Office_Desk = {
+      Office_Desk:function(){OfficeDeskSpawner()}
+  };
+  var Office_Chair = {
+      Office_Chair:function(){OfficeChairSpawner()}
+  };
 
-var Remove = {
-    REMOVE:function(){Remove_model()}
-};
+  var Remove = {
+      REMOVE:function(){Remove_model()}
+  };
 
 
   var gOn = {
@@ -534,7 +534,6 @@ var Remove = {
     mod_drop.add(Dining_Table, 'Dining_Table');
     mod_drop.add(Office_Desk, 'Office_Desk');
     mod_drop.add(Office_Chair,'Office_Chair');
-    mod_drop.add(Remove,'REMOVE');
 
     //FROM MASTER
     /*mod_drop.add(params,'bed').name("Bed");
@@ -563,6 +562,7 @@ var Remove = {
     func_drop.add(gOff,'gridOff');
     func_drop.add(bOn,'BorderCubeOn');
     func_drop.add(bOff,'BorderCubeOff');
+    func_drop.add(Remove,'REMOVE');
 
     gui.open();
   }
