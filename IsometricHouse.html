@@ -532,12 +532,12 @@ scene.add(cube_mesh_sofa);
 RaycasterObjects.push(cube_mesh_sofa);
 couch = cube_mesh_sofa;
 
-//    var mtlLoader = new THREE.MTLLoader();
-  //  mtlLoader.load('models/sofa/sofa.mtl', function(materials){
+    var mtlLoader = new THREE.MTLLoader();
+    mtlLoader.load('models/sofa/sofa.mtl', function(materials){
 
-    //    materials.preload();
+        materials.preload();
         var objLoader = new THREE.OBJLoader();
-      //  objLoader.setMaterials(materials);
+        objLoader.setMaterials(materials);
         loader.load("models/sofa/sofa.obj",function(sofa_mesh){
 
         sofa_mesh.position.set(0, -50, 0);
@@ -545,7 +545,7 @@ couch = cube_mesh_sofa;
         sofa_mesh.scale.set(.75, .75, .75);
         cube_mesh_sofa.add(sofa_mesh);
         });
-  //  });
+   });
 
 }
 
@@ -553,7 +553,7 @@ couch = cube_mesh_sofa;
 var bed;
 function BedSpawner(){
 //transparent Cube For bed
-var geometry_cube_bed = new THREE.BoxGeometry(150,200,210);
+var geometry_cube_bed = new THREE.BoxGeometry(100,100,300);
 var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
      cube_mesh_bed.position.set(-335,50,120);
      scene.add(cube_mesh_bed);
@@ -570,11 +570,11 @@ var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
         objLoader.setMaterials(materials);
 
         objLoader.load("models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj",function(bed_mesh){
-        bed_mesh.position.set(0, 50, 0);
+        //bed_mesh.position.set(0, 50, 0);
         bed_mesh.rotation.y = Math.PI;
         bed_mesh.rotation.z = Math.PI;
         bed_mesh.rotation.x = Math.PI / 2;
-        bed_mesh.scale.set(1, 1, 1);
+        bed_mesh.scale.set(0.70, 1.5, 0.75);
         cube_mesh_bed.add(bed_mesh);
 
         });
@@ -585,7 +585,7 @@ var cube_mesh_bed = new THREE.Mesh(geometry_cube_bed,tranMaterial);
      var diningtable;
      function DiningTableSpawner(){
      //load a dining table object with same white material used for the bed
-     var geometry_cube_dining_table = new THREE.BoxGeometry(300,260,250);
+     var geometry_cube_dining_table = new THREE.BoxGeometry(300,300,300);
 var cube_mesh_dining_table = new THREE.Mesh(geometry_cube_dining_table,tranMaterial);
      cube_mesh_dining_table.position.set(-350,0,-150);
      scene.add(cube_mesh_dining_table);
@@ -606,7 +606,7 @@ var cube_mesh_dining_table = new THREE.Mesh(geometry_cube_dining_table,tranMater
         dining_table_mesh.rotation.y = Math.PI / 2;
         dining_table_mesh.rotation.z = Math.PI;
         dining_table_mesh.rotation.x = Math.PI;
-        dining_table_mesh.scale.set(1.4, 1.4, 1.4);
+        dining_table_mesh.scale.set(1.6, 1.6, 1.6);
        cube_mesh_dining_table.add(dining_table_mesh);
 
         });
@@ -615,7 +615,7 @@ var cube_mesh_dining_table = new THREE.Mesh(geometry_cube_dining_table,tranMater
 //OFFICE DESK
 var officedesk;
 function OfficeDeskSpawner(){
-    var geometry_cube_office_desk = new THREE.BoxGeometry(335,200,150);
+    var geometry_cube_office_desk = new THREE.BoxGeometry(300,200,100);
 
 var cube_mesh_office_desk = new THREE.Mesh(geometry_cube_office_desk,tranMaterial);
      cube_mesh_office_desk.position.set(-100,0,-430);
@@ -629,7 +629,7 @@ var cube_mesh_office_desk = new THREE.Mesh(geometry_cube_office_desk,tranMateria
 
 	 loader.load('models/officedesk/desk.obj', function (office_desk_mesh){
 
-		 //office_desk_mesh.position.set(0, 0,0);
+		 office_desk_mesh.position.set(-60, 0,0);
 		 //object.rotation.y = 0;
 		office_desk_mesh.scale.set(0.45, 0.45, 0.45);
 		 cube_mesh_office_desk.add(office_desk_mesh);
@@ -642,7 +642,7 @@ var officechair;
      var geometry_cube_office_chair = new THREE.BoxGeometry(100,300,100);
 
 var cube_mesh_office_chair = new THREE.Mesh(geometry_cube_office_chair,tranMaterial);
-     cube_mesh_office_chair.position.set(-30,10,-360);
+     cube_mesh_office_chair.position.set(-30,10,-365);
      scene.add(cube_mesh_office_chair);
      RaycasterObjects.push(cube_mesh_office_chair);
      officechair = cube_mesh_office_chair;
@@ -669,7 +669,7 @@ var cube_mesh_office_chair = new THREE.Mesh(geometry_cube_office_chair,tranMater
      //BESIDE TABLE
 var bedsidetable;
      function BedsideTableSpawner(){
- var geometry_cube_bedside_table = new THREE.BoxGeometry(100,200,120);
+ var geometry_cube_bedside_table = new THREE.BoxGeometry(100,200,100);
 
 var cube_mesh_bedside_table = new THREE.Mesh(geometry_cube_bedside_table,tranMaterial);
     cube_mesh_bedside_table.position.set(-450,0,80);
@@ -687,7 +687,7 @@ var cube_mesh_bedside_table = new THREE.Mesh(geometry_cube_bedside_table,tranMat
         objLoader.setMaterials(materials);
 
         objLoader.load("models/bedsidetable/bedsideobj.obj",function(bedside_table_mesh){
-        //bedside_table_mesh.position.set(-450, 0, 80);
+        bedside_table_mesh.position.set(0, 0, 25);
         bedside_table_mesh.rotation.y = 0;
         bedside_table_mesh.scale.set(25, 25, 25);
        cube_mesh_bedside_table.add(bedside_table_mesh);
