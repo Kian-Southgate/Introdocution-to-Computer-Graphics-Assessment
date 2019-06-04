@@ -70,8 +70,13 @@
     // HOUSE
     // west wall
     var westGeometry = new THREE.BoxGeometry (20, 200, 1000);
-    var westMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
-    var westwall = new THREE.Mesh (westGeometry, westMaterial);
+	var wallMaterial = 
+	[
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/render.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide })
+	];
+	var material = new THREE.MeshFaceMaterial(wallMaterial);
+    var westwall = new THREE.Mesh (westGeometry, material);
     westwall.color = new THREE.Color(1, 0, 1);
     westwall.position.x-=500;
     westwall.position.y=100;
@@ -79,8 +84,13 @@
     westwall.receiveshadow = true;
     // east wall
     var eastGeometry = new THREE.BoxGeometry (20, 200, 1000);
-    var eastMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
-    var eastwall = new THREE.Mesh (eastGeometry, eastMaterial);
+    var eastMaterial = 
+	[
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/render.jpg"), side: THREE.DoubleSide })
+	];
+	var materialEast = new THREE.MeshFaceMaterial(eastMaterial); 
+    var eastwall = new THREE.Mesh (eastGeometry, materialEast);
     eastwall.color = new THREE.Color(0xFFEFD5);
     eastwall.position.x+=500;
     eastwall.position.y=100;
@@ -88,55 +98,83 @@
     eastwall.receiveshadow = true;
     // north wall
     var northGeometry = new THREE.BoxGeometry (1000, 200, 20);
-    var northMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
-    var northwall = new THREE.Mesh (northGeometry, northMaterial);
+    var northMaterial = 
+	[
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/render.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide })
+	];
+	var material2 = new THREE.MeshFaceMaterial(northMaterial);
+    var northwall = new THREE.Mesh (northGeometry, material2);
     northwall.color = new THREE.Color(0xFFEFD5);
     northwall.position.x=00;
     northwall.position.y=100;
     northwall.position.z-=500;
     northwall.receiveshadow = true;
+	scene.add (northwall);
     // south wall left
     var south1Geometry = new THREE.BoxGeometry (400, 200, 20);
-    var south1Material = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
-    var south1wall = new THREE.Mesh (south1Geometry, south1Material);
+    var south1Material = 
+	[
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/render.jpg"), side: THREE.DoubleSide })
+	];
+	var material3 = new THREE.MeshFaceMaterial(south1Material);
+    var south1wall = new THREE.Mesh (south1Geometry, material3);
     south1wall.position.x-=300;
     south1wall.position.y=100;
     south1wall.position.z+=500;
     south1wall.receiveshadow = true;
     // south wall right
     var south2Geometry = new THREE.BoxGeometry (500, 200, 20);
-    var south2Material = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});
-    var south2wall = new THREE.Mesh (south2Geometry, south2Material);
+    var south2Material = 
+	[
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
+		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/render.jpg"), side: THREE.DoubleSide })
+	];
+	var material4 = new THREE.MeshFaceMaterial(south2Material);
+    var south2wall = new THREE.Mesh (south2Geometry, material4);
     south2wall.position.x+=250;
     south2wall.position.y=100;
     south2wall.position.z+=500;
     south2wall.receiveshadow = true;
     //floor
     var floorGeometry = new THREE.BoxGeometry (1000, 20, 1000);
-    var floorMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/timberfloor2.jpg")});
+    var floorMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/timber4.jpg")});
     floor = new THREE.Mesh (floorGeometry, floorMaterial);
     floor.position.set(0, 0, 0);
     //Hallway
     var eHallGeometry = new THREE.BoxGeometry (25, 200, 400);
-    var eHallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //East Wall Hallway
+    var eHallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/render.jpg")}); //East Wall Hallway
     var eHall = new THREE.Mesh (eHallGeometry, eHallMaterial);
     eHall.position.x-=100;
     eHall.position.y+=100;
     eHall.position.z+=300;
     var wHallGeometry = new THREE.BoxGeometry (25, 200, 500);
-    var wHallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")});//West Wall Hallway
+    var wHallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/render.jpg")});//West Wall Hallway
     var wHall = new THREE.Mesh (wHallGeometry, wHallMaterial);
     wHall.position.x=0;
     wHall.position.y+=100;
     wHall.position.z+=250;
     var room1HallGeometry = new THREE.BoxGeometry (400, 200, 25);
-    var room1HallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //Right Room
+    var room1HallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/render.jpg")}); //Right Room
     var room1Hall = new THREE.Mesh (room1HallGeometry, room1HallMaterial);
     room1Hall.position.x+=300;
     room1Hall.position.y+=100;
     room1Hall.position.z=0;
     var room2HallGeometry = new THREE.BoxGeometry (400, 200, 25);
-    var room2HallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/brick3.jpg")}); //Left room
+    var room2HallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/render.jpg")}); //Left room
     var room2Hall = new THREE.Mesh (room2HallGeometry, room2HallMaterial);
     room2Hall.position.x-=300;
     room2Hall.position.y+=100;
