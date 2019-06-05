@@ -61,7 +61,7 @@
     light.angle = Math.PI /4;
     light.penumbra = 0.05;
     light.decay = 2;
-    light.distance = 1000;
+    light.distance = 10;
     light.shadow.mapSize.width = 1024;
     light.shadow.mapSize.height = 1024;
     light.shadow.camera.near = 200;
@@ -533,6 +533,11 @@ var Lamp = {
     gridOff:function(){ disableGrid() }
   };
 
+    var rotate = {
+    rotate:function(){ Spinner() }
+  };
+
+
   var bOn = {
     BorderCubeOn:function(){ borderCubeOn() }
   };
@@ -609,6 +614,8 @@ var Tiles = {
     func_drop.add(bOn,'BorderCubeOn');
     func_drop.add(bOff,'BorderCubeOff');
     func_drop.add(Remove,'REMOVE');
+    func_drop.add(rotate, 'rotate');
+      
 
     gui.open();
   }
@@ -647,7 +654,10 @@ var material = new THREE.MeshBasicMaterial( { map: texture } );
 //MAX SHIT PLZ NO TOUCHY
 //Cube TEXTURES
 function Spinner() {
-  selectedObject.rotation.z += Math.PI / 2;
+  selectedObject.rotation.y += Math.PI / 2;
+}
+     function remove_model() {
+  scene.remove(selectedObject);
 }
 
 function borderCubeOn() {
@@ -1058,13 +1068,15 @@ var Gridsize = 1000;
         };
 	 var gui = new dat.GUI();
      var params = {
-        Light_intensity : light.intensity, 
+        Light_intensity : light.intensity,
+         Light_Distance : light.distance,
         //Lamp_intensity : lamplight.intensity,
      };
      
         gui.add(controls, "rotate");
         gui.add(controls, "showVideo").onChange(controls.showCanvas);
         gui.add(params, 'Light_intensity', 0, 2).onChange(function(val){light.intensity = val;});
+        gui.add(params, 'Light_Distance', 0, 10).onChange(function(val){light.distance = val;});
         //gui.add(params, 'Lamp_intensity', 0, 2).onChange(function(val){lamplight.intensity = val;});
 
 </script>
