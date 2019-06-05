@@ -536,6 +536,13 @@ var Lamp = {
     var rotate = {
     rotate:function(){ Spinner() }
   };
+    
+     var hOn = {
+    hOn:function(){ HelperOn() }
+  };
+  var hOff = {
+    hOff:function(){ HelperOff() }
+  };
 
 
   var bOn = {
@@ -611,6 +618,8 @@ var Tiles = {
 
     func_drop.add(gOn,'gridOn');
     func_drop.add(gOff,'gridOff');
+    func_drop.add(hOff, 'hOff');
+    func_drop.add(hOn, 'hOn');
     func_drop.add(bOn,'BorderCubeOn');
     func_drop.add(bOff,'BorderCubeOff');
     func_drop.add(Remove,'REMOVE');
@@ -648,7 +657,12 @@ var material = new THREE.MeshBasicMaterial( { map: texture } );
 }
      
       
-     
+      function HelperOff() {
+  scene.remove(helper);
+}  
+       function HelperOn() {
+  scene.add(helper);
+}  
     
 
 //MAX SHIT PLZ NO TOUCHY
