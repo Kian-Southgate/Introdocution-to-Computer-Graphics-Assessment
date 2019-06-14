@@ -947,6 +947,7 @@ var lamp;
         cube_mesh_lamp.add(lamp_mesh);
 
         var lamplight = new THREE.SpotLight(0xffffff);
+        lamplight.intensity = 0.3;
         lamplight.position.y = 200;
         cube_mesh_lamp.add(lamplight);
 
