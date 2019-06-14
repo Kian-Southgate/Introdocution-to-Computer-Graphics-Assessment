@@ -20,13 +20,30 @@
 <video id="video" style="display: none; position: absolute: left: 15px; top: 75px;" src="videos/TV.mp4" controls="true" autoplay="true"></video>
 
     <style>
-      body {w
-        font-family: ;
-
+      body {
+        font-family: Monospace;
+        background-color: #000;
+        color: #000;
+        margin: 0px;
+        overflow: hidden;
+      }
+      #info {
+        position: absolute;
+        top: 0px;
+        left: 10px;
+        width: 100%;
+        text-align: left;
       }
     </style>
-    <div>
-
+    <div id="info">
+      <p>Hold & drag left mouse button to rotate the scene.<br>
+      Scroll to zoom in/out of the scene.<br>
+      Click on the drop-down menus on the user interface to select its options.<br>
+      Select one model option to spawn it onto the scene.<br>
+      Select one floor texture option to change the flooring appearance.<br>
+      Select a function option to toggle the grid & model borders on and off.<br>
+      Select a model, then select the REMOVE function to remove it from the scene.<br>
+      Click & drag the sliders to change the lighting's intensity and distance.</p>
     </div>
 
  <script>
@@ -54,7 +71,7 @@
     //LIGHTING
     var ambient = new THREE.AmbientLight( 0xffffff, 0.1 );
     scene.add( ambient );
-     
+
     var light = new THREE.SpotLight(0xffffff, 1);
     light.castShadow = true;
     light.position.set(-800, 800, 0);
@@ -73,7 +90,7 @@
     // HOUSE
     // west wall
     var westGeometry = new THREE.BoxGeometry (20, 200, 1000);
-	var wallMaterial = 
+	var wallMaterial =
 	[
 		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/render.jpg"), side: THREE.DoubleSide }),
 		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide })
@@ -87,12 +104,12 @@
     westwall.receiveshadow = true;
     // east wall
     var eastGeometry = new THREE.BoxGeometry (20, 200, 1000);
-    var eastMaterial = 
+    var eastMaterial =
 	[
 		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
 		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/render.jpg"), side: THREE.DoubleSide })
 	];
-	var materialEast = new THREE.MeshFaceMaterial(eastMaterial); 
+	var materialEast = new THREE.MeshFaceMaterial(eastMaterial);
     var eastwall = new THREE.Mesh (eastGeometry, materialEast);
     eastwall.color = new THREE.Color(0xFFEFD5);
     eastwall.position.x+=500;
@@ -101,7 +118,7 @@
     eastwall.receiveshadow = true;
     // north wall
     var northGeometry = new THREE.BoxGeometry (1000, 200, 20);
-    var northMaterial = 
+    var northMaterial =
 	[
 		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
 		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
@@ -120,7 +137,7 @@
 	scene.add (northwall);
     // south wall left
     var south1Geometry = new THREE.BoxGeometry (400, 200, 20);
-    var south1Material = 
+    var south1Material =
 	[
 		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
 		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
@@ -137,7 +154,7 @@
     south1wall.receiveshadow = true;
     // south wall right
     var south2Geometry = new THREE.BoxGeometry (500, 200, 20);
-    var south2Material = 
+    var south2Material =
 	[
 		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
 		new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load("img/brick3.jpg"), side: THREE.DoubleSide }),
@@ -157,7 +174,7 @@
     var floorMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/timber4.jpg")});
     var floor = new THREE.Mesh (floorGeometry, floorMaterial);
     floor.position.set(0, 0, 0);
-    
+
     //Hallway
     var eHallGeometry = new THREE.BoxGeometry (25, 200, 400);
     var eHallMaterial = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture("img/render.jpg")}); //East Wall Hallway
@@ -232,7 +249,7 @@
 
 
     });*/
-	 
+
  //tree 2
 	 var mtlLoader = new THREE.MTLLoader();
 
@@ -527,7 +544,7 @@ function buildGui() {
   var Office_Chair = {
       Office_Chair:function(){OfficeChairSpawner()}
   };
-    
+
 var Lamp = {
     Lamp:function(){LampSpawner()}
 };
@@ -547,7 +564,7 @@ var Lamp = {
     var rotate = {
     rotate:function(){ Spinner() }
   };
-    
+
      var hOn = {
     hOn:function(){ HelperOn() }
   };
@@ -570,15 +587,15 @@ var Lamp = {
   var Bw = {
     BlackWhite:function(){ BWTexture() }
   };
-    
+
 var Carpet = {
     Carpet:function(){CarpetTexture()}
 };
-    
+
 var Bright_Wood = {
     Bright_Wood:function(){WoodTexture()}
 };
-    
+
 var Tiles = {
     Tiles:function(){TilesTexture()}
 };
@@ -595,11 +612,11 @@ var Tiles = {
     mod_drop.add(Office_Desk, 'Office_Desk');
     mod_drop.add(Office_Chair,'Office_Chair');
     mod_drop.add(Lamp, 'Lamp');
-      
+
     //var light_drop = gui.addFolder("Lighting");
-      
+
    // light_drop.add(light.intensity,0,10).name('Intensity').listen();
-      
+
 
     //FROM MASTER
     /*mod_drop.add(params,'bed').name("Bed");
@@ -635,46 +652,46 @@ var Tiles = {
     func_drop.add(bOff,'BorderCubeOff');
     func_drop.add(Remove,'REMOVE');
     func_drop.add(rotate, 'rotate');
-      
+
 
     gui.open();
   }
-  
-  
+
+
 }
-     
-function CarpetTexture() {     
+
+function CarpetTexture() {
 // instantiate a loader
 var texture = new THREE.TextureLoader().load( 'img/carpet.jpg' );
 // immediately use the texture for material creation
 var material = new THREE.MeshBasicMaterial( { map: texture } );
           floor.material = material;
 }
-     
-function WoodTexture() {     
+
+function WoodTexture() {
 // instantiate a loader
 var texture = new THREE.TextureLoader().load( 'img/timberfloor3.jpg' );
 // immediately use the texture for material creation
 var material = new THREE.MeshBasicMaterial( { map: texture } );
           floor.material = material;
 }
-     
-function TilesTexture() {     
+
+function TilesTexture() {
 // instantiate a loader
 var texture = new THREE.TextureLoader().load( 'img/tiles5.jpg' );
 // immediately use the texture for material creation
 var material = new THREE.MeshBasicMaterial( { map: texture } );
           floor.material = material;
 }
-     
-      
+
+
       function HelperOff() {
   scene.remove(helper);
-}  
+}
        function HelperOn() {
   scene.add(helper);
-}  
-    
+}
+
 
 //MAX SHIT PLZ NO TOUCHY
 //Cube TEXTURES
@@ -903,7 +920,7 @@ var cube_mesh_bedside_table = new THREE.Mesh(geometry_cube_bedside_table,tranMat
         });
     });
      }
-         
+
 //LAMP
 var lamp;
  function LampSpawner(){
@@ -928,18 +945,18 @@ var lamp;
         //bedside_table_mesh.rotation.y = 0;
         lamp_mesh.scale.set(15, 15, 15);
         cube_mesh_lamp.add(lamp_mesh);
-            
+
         var lamplight = new THREE.SpotLight(0xffffff);
         lamplight.position.y = 200;
         cube_mesh_lamp.add(lamplight);
-            
+
         //var lamplighthelper = new THREE.SpotLightHelper(lamplight);
         //scene.add(lamplighthelper);
 
         });
-    });             
+    });
 }
-     
+
 
 //Grid
 var Gridsize = 1000;
@@ -1097,7 +1114,7 @@ var Gridsize = 1000;
          Light_Distance : light.distance,
         //Lamp_intensity : lamplight.intensity,
      };
-     
+
         //gui.add(controls, "rotate");
         //gui.add(controls, "showVideo").onChange(controls.showCanvas);
         gui.add(params, 'Light_intensity', 0, 2).onChange(function(val){light.intensity = val;});
